@@ -136,6 +136,7 @@ export function ItemsPage() {
                       value={formItemQuantity}
                       onChange={onChangeFormItemQuantity}
                       min="0.001"
+                      step="any"
                       required
                     />
                     <Form.Control.Feedback type="invalid">
