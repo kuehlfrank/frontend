@@ -17,9 +17,7 @@ import {
   Col,
   Form,
   Button,
-  FormControl,
-  FormLabel,
-  FormText,
+  FormGroup,
   InputGroup,
 } from 'react-bootstrap';
 import { sliceKey, reducer, actions } from './slice';
@@ -44,7 +42,7 @@ export function ItemsPage() {
   };
 
   useEffectOnMount(() => {
-    dispatch(actions.loadItems);
+    dispatch(actions.loadItems());
   });
 
   const onChangeFormItemName = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +66,6 @@ export function ItemsPage() {
       quantity: formItemQuantity,
     };
     if (evt !== undefined && evt.preventDefault) {
-      console.log(item);
       dispatch(actions.addItem(item));
       evt.preventDefault();
     } else {
@@ -86,37 +83,45 @@ export function ItemsPage() {
           <Col>
             <Form inline onSubmit={onSubmitForm}>
               <Form.Row>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <Form.Label className="input-group-text">Name</Form.Label>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    value={formItemName}
-                    onChange={onChangeFormItemName}
-                  ></Form.Control>
-                </InputGroup>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <Form.Label className="input-group-text">Unit</Form.Label>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    value={formItemUnit}
-                    onChange={onChangeFormItemUnit}
-                  ></Form.Control>
-                </InputGroup>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <Form.Label className="input-group-text">
-                      Quantity
-                    </Form.Label>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    type="number"
-                    value={formItemQuantity}
-                    onChange={onChangeFormItemQuantity}
-                  ></Form.Control>
-                </InputGroup>
-                <Button type="submit">Add item</Button>
+                <FormGroup as={Col} md="4">
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <Form.Label className="input-group-text">Name</Form.Label>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                      value={formItemName}
+                      onChange={onChangeFormItemName}
+                    ></Form.Control>
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup as={Col} md="3">
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <Form.Label className="input-group-text">Unit</Form.Label>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                      value={formItemUnit}
+                      onChange={onChangeFormItemUnit}
+                    ></Form.Control>
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup as={Col} md="2">
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <Form.Label className="input-group-text">
+                        Quantity
+                      </Form.Label>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                      type="number"
+                      value={formItemQuantity}
+                      onChange={onChangeFormItemQuantity}
+                    ></Form.Control>
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup as={Col} md="3">
+                  <Button type="submit">Add item</Button>
+                </FormGroup>
               </Form.Row>
             </Form>
           </Col>

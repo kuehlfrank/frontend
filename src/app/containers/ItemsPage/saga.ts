@@ -10,8 +10,6 @@ import { Item } from 'types/Item';
 import { ItemErrorType } from './types';
 
 export function* getItems() {
-  yield delay(500);
-
   const requestURL = 'http://google.com';
 
   try {
