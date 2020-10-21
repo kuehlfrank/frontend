@@ -20,6 +20,8 @@ import {
   Button,
   FormGroup,
   InputGroup,
+  Spinner,
+  Alert,
 } from 'react-bootstrap';
 import { sliceKey, reducer, actions } from './slice';
 import { Item } from 'types/Item';
@@ -74,86 +76,111 @@ export function ItemsPage() {
         evt.stopPropagation();
       } else {
         dispatch(actions.addItem(item));
+        dispatch(actions.loadItems());
         evt.preventDefault();
       }
       dispatch(actions.validateForm(true));
     } else {
-      //   dispatch(actions.loadItems);
     }
   };
+
+  function errorString() {
+    if (error !== null) {
+      switch (error) {
+        case 1:
+          break;
+        case 99:
+          return 'Could not fetch data.';
+        default:
+          return '';
+      }
+    }
+  }
 
   return (
     <>
       <Helmet>
         <title>Items</title>
       </Helmet>
-      <Container fluid="md">
+      <Container>
+        <Form onSubmit={onSubmitForm} noValidate validated={validated}>
+          <Form.Row>
+            <FormGroup as={Col} md="4" controlId="validationName">
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Name</InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="text"
+                  value={formItemName}
+                  onChange={onChangeFormItemName}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please give a name.
+                </Form.Control.Feedback>
+              </InputGroup>
+            </FormGroup>
+            <FormGroup as={Col} md="3" controlId="validationUnit">
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text className="input-group-text">
+                    Unit
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="text"
+                  value={formItemUnit}
+                  onChange={onChangeFormItemUnit}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please give an unit.
+                </Form.Control.Feedback>
+              </InputGroup>
+            </FormGroup>
+            <FormGroup as={Col} md="4" controlId="ValidationQuantity">
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Quantity</InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="number"
+                  value={formItemQuantity}
+                  onChange={onChangeFormItemQuantity}
+                  min="0.001"
+                  step="any"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Give a quantity greater than 0.
+                </Form.Control.Feedback>
+              </InputGroup>
+            </FormGroup>
+            <FormGroup as={Col}>
+              <Button type="submit" className="float-right">
+                Add
+              </Button>
+            </FormGroup>
+          </Form.Row>
+        </Form>
+      </Container>
+      <Container>
         <Row>
-          <Col>
-            <Form onSubmit={onSubmitForm} noValidate validated={validated}>
-              <Form.Row>
-                <FormGroup as={Col} md="4" controlId="validationName">
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text>Name</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control
-                      type="text"
-                      value={formItemName}
-                      onChange={onChangeFormItemName}
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      Please give a name.
-                    </Form.Control.Feedback>
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup as={Col} md="3" controlId="validationUnit">
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text className="input-group-text">
-                        Unit
-                      </InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control
-                      type="text"
-                      value={formItemUnit}
-                      onChange={onChangeFormItemUnit}
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      Please give an unit.
-                    </Form.Control.Feedback>
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup as={Col} md="2" controlId="ValidationQuantity">
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text>Quantity</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control
-                      type="number"
-                      value={formItemQuantity}
-                      onChange={onChangeFormItemQuantity}
-                      min="0.001"
-                      step="any"
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      Give a quantity greater than 0.
-                    </Form.Control.Feedback>
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup as={Col} md="3">
-                  <Button type="submit">Add item</Button>
-                </FormGroup>
-              </Form.Row>
-            </Form>
-          </Col>
-        </Row>
-        <Row>
-          {items.map(item => (
-            <Col md="3">
+          {loading && (
+            <Col md="3" key="-2">
+              <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            </Col>
+          )}
+          {error !== null && (
+            <Col md="12" key="-1">
+              <Alert variant="danger">{errorString()}</Alert>
+            </Col>
+          )}
+          {items.map((item, i) => (
+            <Col md="3" key="i">
               <ItemElement
                 name={item.name}
                 unit={item.unit}
