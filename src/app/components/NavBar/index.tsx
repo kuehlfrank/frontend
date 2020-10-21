@@ -1,5 +1,6 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
+import { LoginButton } from '../LoginButton';
 
 export function NavBar() {
   return (
@@ -21,6 +22,7 @@ export function NavBar() {
             <Nav.Link href="/#/home">Home</Nav.Link>
             <Nav.Link href="/#/items">Items</Nav.Link>
           </Nav>
+          <LoginButton />
         </Navbar.Collapse>
       </Navbar>
     </>
