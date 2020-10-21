@@ -140,7 +140,7 @@ export function ItemsPage() {
                       required
                     />
                     <Form.Control.Feedback type="invalid">
-                      Give a qunatity greater than 0.
+                      Give a quantity greater than 0.
                     </Form.Control.Feedback>
                   </InputGroup>
                 </FormGroup>
