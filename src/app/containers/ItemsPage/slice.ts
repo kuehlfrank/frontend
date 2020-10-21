@@ -5,6 +5,7 @@ import { Item } from 'types/Item';
 
 export const initialState: ItemsPageState = {
   formItem: { name: '', quantity: 0, unit: '' },
+  validated: false,
   items: [],
   loading: false,
   error: null,
@@ -22,6 +23,9 @@ const itemsFormSlice = createSlice({
     },
     changeItemQuantity(state, action: PayloadAction<number>) {
       state.formItem.quantity = action.payload;
+    },
+    validateForm(state, action: PayloadAction<boolean>) {
+      state.validated = action.payload;
     },
     loadItems(state) {
       state.loading = true;

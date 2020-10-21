@@ -9,6 +9,7 @@ import {
   selectFormItemName,
   selectFormItemUnit,
   selectFormItemQuantity,
+  selectValidated,
 } from './selectors';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -32,6 +33,7 @@ export function ItemsPage() {
   const formItemName = useSelector(selectFormItemName);
   const formItemUnit = useSelector(selectFormItemUnit);
   const formItemQuantity = useSelector(selectFormItemQuantity);
+  const validated = useSelector(selectValidated);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
@@ -59,15 +61,22 @@ export function ItemsPage() {
     dispatch(actions.changeItemQuantity(Number(evt.currentTarget.value)));
   };
 
-  const onSubmitForm = (evt?: React.FormEvent<HTMLElement>) => {
+  const onSubmitForm = (evt: React.FormEvent<HTMLFormElement>) => {
+    const form = evt.currentTarget;
     let item: Item = {
       name: formItemName,
       unit: formItemUnit,
       quantity: formItemQuantity,
     };
     if (evt !== undefined && evt.preventDefault) {
-      dispatch(actions.addItem(item));
-      evt.preventDefault();
+      if (form.checkValidity() === false) {
+        evt.preventDefault();
+        evt.stopPropagation();
+      } else {
+        dispatch(actions.addItem(item));
+        evt.preventDefault();
+      }
+      dispatch(actions.validateForm(true));
     } else {
       //   dispatch(actions.loadItems);
     }
@@ -81,42 +90,57 @@ export function ItemsPage() {
       <Container fluid="md">
         <Row>
           <Col>
-            <Form inline onSubmit={onSubmitForm}>
+            <Form onSubmit={onSubmitForm} noValidate validated={validated}>
               <Form.Row>
-                <FormGroup as={Col} md="4">
+                <FormGroup as={Col} md="4" controlId="validationName">
                   <InputGroup>
                     <InputGroup.Prepend>
-                      <Form.Label className="input-group-text">Name</Form.Label>
+                      <InputGroup.Text>Name</InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control
+                      type="text"
                       value={formItemName}
                       onChange={onChangeFormItemName}
-                    ></Form.Control>
+                      required
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please give a name.
+                    </Form.Control.Feedback>
                   </InputGroup>
                 </FormGroup>
-                <FormGroup as={Col} md="3">
+                <FormGroup as={Col} md="3" controlId="validationUnit">
                   <InputGroup>
                     <InputGroup.Prepend>
-                      <Form.Label className="input-group-text">Unit</Form.Label>
+                      <InputGroup.Text className="input-group-text">
+                        Unit
+                      </InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control
+                      type="text"
                       value={formItemUnit}
                       onChange={onChangeFormItemUnit}
-                    ></Form.Control>
+                      required
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please give an unit.
+                    </Form.Control.Feedback>
                   </InputGroup>
                 </FormGroup>
-                <FormGroup as={Col} md="2">
+                <FormGroup as={Col} md="2" controlId="ValidationQuantity">
                   <InputGroup>
                     <InputGroup.Prepend>
-                      <Form.Label className="input-group-text">
-                        Quantity
-                      </Form.Label>
+                      <InputGroup.Text>Quantity</InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control
                       type="number"
                       value={formItemQuantity}
                       onChange={onChangeFormItemQuantity}
-                    ></Form.Control>
+                      min="0.001"
+                      required
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Give a qunatity greater than 0.
+                    </Form.Control.Feedback>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup as={Col} md="3">
@@ -128,7 +152,7 @@ export function ItemsPage() {
         </Row>
         <Row>
           {items.map(item => (
-            <Col xs="3">
+            <Col md="3">
               <ItemElement
                 name={item.name}
                 unit={item.unit}

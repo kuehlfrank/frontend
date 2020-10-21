@@ -15,6 +15,11 @@ export const selectFormItemName = createSelector(
   itemsFormState => itemsFormState.formItem.name,
 );
 
+export const selectValidated = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.validated,
+);
+
 export const selectFormItemUnit = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.formItem.unit,

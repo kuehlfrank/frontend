@@ -2,6 +2,7 @@ import { Item } from 'types/Item';
 
 export interface ItemsFormState {
   formItem: Item;
+  validated: boolean;
   loading: boolean;
   items: Item[];
   error?: ItemErrorType | null;
