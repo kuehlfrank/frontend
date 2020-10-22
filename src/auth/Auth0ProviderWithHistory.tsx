@@ -10,10 +10,10 @@ export function Auth0ProviderWithHistory({ children }) {
   const history = useHistory();
 
   const onRedirectCallback = appState => {
-    history.replace(
-      window.location.hash ? window.location.hash : window.location.pathname,
-    );
-    // history.push(appState?.returnTo || window.location.pathname);
+    // history.replace(
+    //   window.location.hash ? window.location.hash : window.location.pathname,
+    // );
+    history.push(appState?.returnTo || window.location.pathname);
   };
 
   return (
@@ -23,7 +23,7 @@ export function Auth0ProviderWithHistory({ children }) {
         clientId={clientId}
         redirectUri={window.location.origin}
         audience={audience}
-        // onRedirectCallback={onRedirectCallback}
+        onRedirectCallback={onRedirectCallback}
       >
         {children}
       </Auth0Provider>
