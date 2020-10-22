@@ -1,5 +1,5 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { request, requestPrivate } from 'utils/request';
+import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { postPrivate, request, requestPrivate } from 'utils/request';
 import {
   selectFormItemName,
   selectFormItemQuantity,
@@ -12,6 +12,7 @@ import { ItemErrorType } from './types';
 
 export function* getItems() {
   const token: string = yield select(selectToken);
+  const userId: string = '';
   const requestURL = 'https://api.kuehlfrank.de/private/inventory';
   try {
     const items: Item[] = yield call(requestPrivate, requestURL, token);
@@ -26,6 +27,23 @@ export function* getItems() {
   }
 }
 
+export function* addItem() {
+  const token: string = yield select(selectToken);
+  const userId: string = '';
+  const requestURL = `https://api.kuehlfrank.de/inventory?userId=${userId}`;
+  const item: Item = {
+    name: yield select(selectFormItemName),
+    quantity: yield select(selectFormItemQuantity),
+    unit: yield select(selectFormItemUnit),
+  };
+
+  try {
+    const response = yield call(postPrivate, requestURL, token, item);
+    yield put(actions.loadItems());
+  } catch (err) {}
+}
+
 export function* itemsRepoSaga() {
   yield takeLatest(actions.loadItems.type, getItems);
+  yield takeEvery(actions.addItem.type, addItem);
 }

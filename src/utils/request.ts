@@ -68,3 +68,22 @@ export async function requestPrivate(
   const response = checkStatus(fetchResponse);
   return parseJSON(response);
 }
+
+export async function postPrivate(
+  url: string,
+  token: string,
+  data: any,
+  options?: RequestInit,
+): Promise<{} | { err: ResponseError }> {
+  if (options === undefined) {
+    options = {};
+  }
+  options.method = 'POST';
+  options.headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  options.body = data.json();
+  const fetchResponse = await fetch(url, options);
+  const response = checkStatus(fetchResponse);
+  return parseJSON(response);
+}
