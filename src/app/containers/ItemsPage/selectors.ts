@@ -5,6 +5,11 @@ import { initialState } from './slice';
 
 const selectDomain = (state: RootState) => state.itemForm || initialState;
 
+export const selectToken = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.token,
+);
+
 export const selectItems = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.items,

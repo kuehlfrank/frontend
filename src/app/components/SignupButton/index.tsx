@@ -2,20 +2,20 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from 'react-bootstrap';
 
-export function LoginButton() {
+export function SignupButton() {
   const { loginWithRedirect } = useAuth0();
   return (
     <>
       <Button
         type="button"
-        variant="primary"
+        variant="secondary"
         onClick={() =>
           loginWithRedirect({
-            returnTo: window.location.origin,
+            screen_hint: 'signup',
           })
         }
       >
-        Login
+        Sign Up
       </Button>
     </>
   );

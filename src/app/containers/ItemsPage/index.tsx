@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { itemsRepoSaga } from './saga';
@@ -28,8 +29,12 @@ import { Item } from 'types/Item';
 import { ItemElement } from './ItemElement';
 
 export function ItemsPage() {
+  const { getAccessTokenSilently } = useAuth0();
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: itemsRepoSaga });
+  useInjectSaga({
+    key: sliceKey,
+    saga: itemsRepoSaga,
+  });
 
   const items = useSelector(selectItems);
   const formItemName = useSelector(selectFormItemName);
@@ -45,8 +50,18 @@ export function ItemsPage() {
     useEffect(effect, []);
   };
 
+  function loadItemsWithToken() {
+    getAccessTokenSilently()
+      .then(t => {
+        dispatch(actions.setToken(t));
+      })
+      .then(() => {
+        dispatch(actions.loadItems());
+      });
+  }
+
   useEffectOnMount(() => {
-    dispatch(actions.loadItems());
+    loadItemsWithToken();
   });
 
   const onChangeFormItemName = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,6 +90,9 @@ export function ItemsPage() {
         evt.preventDefault();
         evt.stopPropagation();
       } else {
+        getAccessTokenSilently().then(t => {
+          dispatch(actions.setToken(t));
+        });
         dispatch(actions.addItem(item));
         dispatch(actions.loadItems());
         evt.preventDefault();

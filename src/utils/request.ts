@@ -52,3 +52,19 @@ export async function request(
   const response = checkStatus(fetchResponse);
   return parseJSON(response);
 }
+
+export async function requestPrivate(
+  url: string,
+  token: string,
+  options?: RequestInit,
+): Promise<{} | { err: ResponseError }> {
+  if (options === undefined) {
+    options = {};
+  }
+  options.headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const fetchResponse = await fetch(url, options);
+  const response = checkStatus(fetchResponse);
+  return parseJSON(response);
+}

@@ -6,6 +6,7 @@ export interface ItemsFormState {
   loading: boolean;
   items: Item[];
   error?: ItemErrorType | null;
+  token?: string | null;
 }
 
 export enum ItemErrorType {

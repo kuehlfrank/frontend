@@ -16,7 +16,8 @@ import { HomePage } from './containers/HomePage/Loadable';
 import { NavBar } from './components/NavBar';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { ItemsPage } from './containers/ItemsPage/Loadable';
-import Auth0ProviderWithHistory from 'auth/Auth0ProviderWithHistory';
+import { Auth0ProviderWithHistory } from 'auth/Auth0ProviderWithHistory';
+import { ProtectedRoute } from 'auth/ProtectedRoute';
 
 export function App() {
   return (
@@ -35,7 +36,7 @@ export function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/home" component={HomePage} />
-          <Route path="/items" component={ItemsPage} />
+          <ProtectedRoute path="/items" component={ItemsPage} />
           <Route component={NotFoundPage} />
         </Switch>
         <GlobalStyle />

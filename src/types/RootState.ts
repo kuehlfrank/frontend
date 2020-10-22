@@ -1,5 +1,4 @@
 import { ItemsFormState } from 'app/containers/ItemsPage/types';
-import { AuthenticationProviderState } from 'auth/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -7,7 +6,6 @@ import { AuthenticationProviderState } from 'auth/types';
   You have to declare them here manually
 */
 export interface RootState {
-  authenticationProviderState: AuthenticationProviderState;
   itemForm: ItemsFormState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

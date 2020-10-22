@@ -9,6 +9,7 @@ export const initialState: ItemsPageState = {
   items: [],
   loading: false,
   error: null,
+  token: null,
 };
 
 const itemsFormSlice = createSlice({
@@ -26,6 +27,9 @@ const itemsFormSlice = createSlice({
     },
     validateForm(state, action: PayloadAction<boolean>) {
       state.validated = action.payload;
+    },
+    setToken(state, action: PayloadAction<string>) {
+      state.token = action.payload;
     },
     loadItems(state) {
       state.loading = true;
