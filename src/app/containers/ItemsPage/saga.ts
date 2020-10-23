@@ -15,7 +15,7 @@ import { Inventory } from 'types/Inventory';
 export function* getItems() {
   const token: string = yield select(selectToken);
   const userId: string = encodeURIComponent(yield select(selectUserId));
-  const requestURL = `http://localhost:8080/inventory?userId=${userId}`;
+  const requestURL = `https://api.kuehlfrank.de/inventory?userId=${userId}`;
   try {
     const inventory: Inventory = yield call(requestPrivate, requestURL, token);
     let items: Item[] = inventory.inventoryEntries.map(e => ({
