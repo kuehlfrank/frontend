@@ -11,13 +11,12 @@ import { actions } from './slice';
 import { Item } from 'types/Item';
 import { ItemErrorType } from './types';
 import { Inventory } from 'types/Inventory';
-const apiurl = process.env.REACT_API_SERVER_URL as string; // Kein Plan ist undefined ._.
-console.log(apiurl);
+const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 
 export function* getItems() {
   const token: string = yield select(selectToken);
   const userId: string = encodeURIComponent(yield select(selectUserId));
-  const requestURL = `${apiurl}/inventory?userId=${userId}`;
+  const requestURL = `${API_URL}/inventory?userId=${userId}`;
   try {
     const inventory: Inventory = yield call(requestPrivate, requestURL, token);
     let items: Item[] = inventory.inventoryEntries.map(e => ({
@@ -39,7 +38,7 @@ export function* getItems() {
 export function* addItem() {
   const token: string = yield select(selectToken);
   const userId: string = yield select(selectUserId);
-  const requestURL = `https://api.kuehlfrank.de/inventory?userId=${userId}`;
+  const requestURL = `${API_URL}/inventory?userId=${userId}`;
   const item: Item = {
     name: yield select(selectFormItemName),
     quantity: yield select(selectFormItemQuantity),
