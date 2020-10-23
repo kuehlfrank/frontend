@@ -7,6 +7,7 @@ export interface ItemsFormState {
   items: Item[];
   error?: ItemErrorType | null;
   token?: string | null;
+  userId?: string | null;
 }
 
 export enum ItemErrorType {

@@ -31,6 +31,9 @@ const itemsFormSlice = createSlice({
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
     },
+    setUserId(state, action: PayloadAction<string>) {
+      state.userId = action.payload;
+    },
     loadItems(state) {
       state.loading = true;
       state.error = null;

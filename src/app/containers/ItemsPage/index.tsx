@@ -29,7 +29,7 @@ import { Item } from 'types/Item';
 import { ItemElement } from './ItemElement';
 
 export function ItemsPage() {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({
     key: sliceKey,
@@ -54,6 +54,7 @@ export function ItemsPage() {
     getAccessTokenSilently()
       .then(t => {
         dispatch(actions.setToken(t));
+        dispatch(actions.setUserId(user.sub));
       })
       .then(() => {
         dispatch(actions.loadItems());

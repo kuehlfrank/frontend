@@ -5,6 +5,7 @@ import {
   selectFormItemQuantity,
   selectFormItemUnit,
   selectToken,
+  selectUserId,
 } from './selectors';
 import { actions } from './slice';
 import { Item } from 'types/Item';
@@ -12,8 +13,8 @@ import { ItemErrorType } from './types';
 
 export function* getItems() {
   const token: string = yield select(selectToken);
-  const userId: string = '';
-  const requestURL = 'https://api.kuehlfrank.de/private/inventory';
+  const userId: string = yield select(selectUserId);
+  const requestURL = `https://api.kuehlfrank.de/private/inventory?userId=${userId}`;
   try {
     const items: Item[] = yield call(requestPrivate, requestURL, token);
 
@@ -29,7 +30,7 @@ export function* getItems() {
 
 export function* addItem() {
   const token: string = yield select(selectToken);
-  const userId: string = '';
+  const userId: string = yield select(selectUserId);
   const requestURL = `https://api.kuehlfrank.de/inventory?userId=${userId}`;
   const item: Item = {
     name: yield select(selectFormItemName),
