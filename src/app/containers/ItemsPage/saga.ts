@@ -11,11 +11,13 @@ import { actions } from './slice';
 import { Item } from 'types/Item';
 import { ItemErrorType } from './types';
 import { Inventory } from 'types/Inventory';
+const apiurl = process.env.REACT_API_SERVER_URL as string; // Kein Plan ist undefined ._.
+console.log(apiurl);
 
 export function* getItems() {
   const token: string = yield select(selectToken);
   const userId: string = encodeURIComponent(yield select(selectUserId));
-  const requestURL = `http://localhost:8080/inventory?userId=${userId}`;
+  const requestURL = `${apiurl}/inventory?userId=${userId}`;
   try {
     const inventory: Inventory = yield call(requestPrivate, requestURL, token);
     let items: Item[] = inventory.inventoryEntries.map(e => ({
