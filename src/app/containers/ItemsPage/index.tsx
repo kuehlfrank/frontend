@@ -199,7 +199,7 @@ export function ItemsPage() {
             </Col>
           )}
           {items.map((item, i) => (
-            <Col md="3" key="i">
+            <Col md="3" key={i}>
               <ItemElement
                 name={item.name}
                 unit={item.unit}
