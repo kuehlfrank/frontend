@@ -61,8 +61,9 @@ export function* getScannedItemInfo() {
   try {
     const response = yield call(request, requestURL);
     console.log(response);
+    console.log(response.product.product_name);
 
-    put(actions.changeItemName(response.product_name));
+    put(actions.changeItemName(response.product.product_name));
   } catch (err) {
     console.error(err);
   }
