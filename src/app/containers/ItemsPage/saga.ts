@@ -67,6 +67,7 @@ export function* getScannedItemInfo() {
   } catch (err) {
     console.error(err);
   }
+  console.log(select(selectFormItemName));
 }
 
 export function* itemsRepoSaga() {
