@@ -219,9 +219,10 @@ export function ItemsPage() {
               {scanning ? (
                 <BarcodeScanner
                   scannerRef={scannerRef}
-                  onDetected={result =>
-                    dispatch(actions.codeResultLoaded(result))
-                  }
+                  onDetected={result => {
+                    console.log(result);
+                    dispatch(actions.codeResultLoaded(result));
+                  }}
                 />
               ) : null}
             </div>
