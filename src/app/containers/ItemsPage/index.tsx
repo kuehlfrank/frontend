@@ -170,6 +170,7 @@ export function ItemsPage() {
                 </Form.Control.Feedback>
               </InputGroup>
             </FormGroup>
+            <span>{formItemName}</span>
             <FormGroup as={Col} md="4" controlId="ValidationQuantity">
               <InputGroup>
                 <InputGroup.Prepend>
