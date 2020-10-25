@@ -63,11 +63,11 @@ export function* getScannedItemInfo() {
     console.log(response);
     console.log(response.product.product_name);
 
-    put(actions.changeItemName(response.product.product_name));
+    yield put(actions.changeItemName(response.product.product_name));
   } catch (err) {
     console.error(err);
   }
-  console.log(select(selectFormItemName));
+  console.log(yield select(selectFormItemName));
 }
 
 export function* itemsRepoSaga() {
