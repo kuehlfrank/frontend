@@ -11,7 +11,7 @@ export const initialState: ItemsPageState = {
   error: null,
   token: null,
   scanning: false,
-  results: {} as CodeResult,
+  result: null,
 };
 
 const itemsFormSlice = createSlice({
@@ -56,9 +56,9 @@ const itemsFormSlice = createSlice({
     setScanning(state, action: PayloadAction<boolean>) {
       state.scanning = action.payload;
     },
-    codeResultLoaded(state, action: PayloadAction<CodeResult>) {
+    codeResultLoaded(state, action: PayloadAction<string>) {
       state.scanning = false;
-      state.results = action.payload;
+      state.result = action.payload;
     },
   },
 });

@@ -4,7 +4,7 @@ import {
   selectFormItemName,
   selectFormItemQuantity,
   selectFormItemUnit,
-  selectScanResults,
+  selectScanResult,
   selectToken,
   selectUserId,
 } from './selectors';
@@ -53,10 +53,9 @@ export function* addItem() {
 }
 
 export function* getScannedItemInfo() {
-  const codeResult: CodeResult = yield select(selectScanResults);
-  const result = codeResult.codeResult[0];
+  const codeResult = yield select(selectScanResult);
 
-  const requestURL = `https://world.openfoodfacts.org/api/v0/product/${result.code}.json`;
+  const requestURL = `https://world.openfoodfacts.org/api/v0/product/${codeResult}.json`;
 
   try {
     const response = yield call(request, requestURL);

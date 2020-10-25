@@ -17,7 +17,7 @@ export interface ItemsFormState {
   token?: string | null;
   userId?: string | null;
   scanning: boolean;
-  results: CodeResult;
+  result?: string | null;
 }
 
 export enum ItemErrorType {

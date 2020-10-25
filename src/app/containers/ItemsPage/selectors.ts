@@ -56,7 +56,7 @@ export const selectScanning = createSelector(
   itemsFormState => itemsFormState.scanning,
 );
 
-export const selectScanResults = createSelector(
+export const selectScanResult = createSelector(
   [selectDomain],
-  itemsFormState => itemsFormState.results,
+  itemsFormState => itemsFormState.result,
 );
