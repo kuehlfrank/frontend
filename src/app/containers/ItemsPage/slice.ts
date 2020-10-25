@@ -57,6 +57,7 @@ const itemsFormSlice = createSlice({
       state.scanning = action.payload;
     },
     codeResultLoaded(state, action: PayloadAction<CodeResult>) {
+      state.scanning = false;
       state.results = action.payload;
     },
   },
