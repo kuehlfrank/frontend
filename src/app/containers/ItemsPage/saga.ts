@@ -56,18 +56,17 @@ export function* getScannedItemInfo() {
   const codeResult = yield select(selectScanResult);
 
   const requestURL = `https://world.openfoodfacts.org/api/v0/product/${codeResult}.json`;
-  console.log(requestURL);
 
   try {
     const response = yield call(request, requestURL);
-    console.log(response);
-    console.log(response.product.product_name);
 
     yield put(actions.changeItemName(response.product.product_name));
+    let quantity: string = response.product.quantity.split(' ') as string;
+    yield put(actions.changeItemQuantity(parseInt(quantity[0])));
+    yield put(actions.changeItemUnit(quantity[1]));
   } catch (err) {
     console.error(err);
   }
-  console.log(yield select(selectFormItemName));
 }
 
 export function* itemsRepoSaga() {

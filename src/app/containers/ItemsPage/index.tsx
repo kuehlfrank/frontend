@@ -170,7 +170,6 @@ export function ItemsPage() {
                 </Form.Control.Feedback>
               </InputGroup>
             </FormGroup>
-            <span>{formItemName}</span>
             <FormGroup as={Col} md="4" controlId="ValidationQuantity">
               <InputGroup>
                 <InputGroup.Prepend>
@@ -221,7 +220,6 @@ export function ItemsPage() {
                 <BarcodeScanner
                   scannerRef={scannerRef}
                   onDetected={result => {
-                    console.log(result);
                     dispatch(actions.codeResultLoaded(result));
                   }}
                 />
