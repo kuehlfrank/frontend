@@ -1,4 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
+import { select } from 'redux-saga/effects';
 
 import { RootState } from 'types';
 import { initialState } from './slice';
@@ -48,4 +49,14 @@ export const selectLoading = createSelector(
 export const selectError = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.error,
+);
+
+export const selectScanning = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.scanning,
+);
+
+export const selectScanResults = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.results,
 );

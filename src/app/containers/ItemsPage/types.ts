@@ -1,5 +1,13 @@
 import { Item } from 'types/Item';
 
+export interface Code {
+  code: string;
+}
+
+export interface CodeResult {
+  codeResult: Code[];
+}
+
 export interface ItemsFormState {
   formItem: Item;
   validated: boolean;
@@ -8,6 +16,8 @@ export interface ItemsFormState {
   error?: ItemErrorType | null;
   token?: string | null;
   userId?: string | null;
+  scanning: boolean;
+  results: CodeResult;
 }
 
 export enum ItemErrorType {

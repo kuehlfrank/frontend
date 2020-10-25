@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
-import { ItemErrorType, ItemsPageState } from './types';
+import { CodeResult, ItemErrorType, ItemsPageState } from './types';
 import { Item } from 'types/Item';
 
 export const initialState: ItemsPageState = {
@@ -10,6 +10,8 @@ export const initialState: ItemsPageState = {
   loading: false,
   error: null,
   token: null,
+  scanning: false,
+  results: {} as CodeResult,
 };
 
 const itemsFormSlice = createSlice({
@@ -50,6 +52,12 @@ const itemsFormSlice = createSlice({
     },
     addItem(state, action: PayloadAction<Item>) {
       state.items.push(action.payload);
+    },
+    setScanning(state, action: PayloadAction<boolean>) {
+      state.scanning = action.payload;
+    },
+    codeResultLoaded(state, action: PayloadAction<CodeResult>) {
+      state.results = action.payload;
     },
   },
 });

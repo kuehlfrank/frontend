@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { itemsRepoSaga } from './saga';
+import BarcodeScanner from 'app/components/BarcodeScanner/index';
 import {
   selectItems,
   selectLoading,
@@ -11,6 +12,7 @@ import {
   selectFormItemUnit,
   selectFormItemQuantity,
   selectValidated,
+  selectScanning,
 } from './selectors';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -43,6 +45,8 @@ export function ItemsPage() {
   const validated = useSelector(selectValidated);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const scanning = useSelector(selectScanning);
+  const scannerRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -116,6 +120,14 @@ export function ItemsPage() {
     }
   }
 
+  function scan() {
+    dispatch(actions.setScanning(!scanning));
+  }
+
+  function onDetected(result) {
+    dispatch(actions.codeResultLoaded(result));
+  }
+
   return (
     <>
       <Helmet>
@@ -183,6 +195,43 @@ export function ItemsPage() {
             </FormGroup>
           </Form.Row>
         </Form>
+      </Container>
+      <Container>
+        <Row>
+          <Col md="11">
+            <div
+              ref={scannerRef}
+              style={{
+                position: 'relative',
+                border: '3px solid red',
+              }}
+            >
+              <canvas
+                className="drawingBuffer"
+                style={{
+                  position: 'absolute',
+                  top: '0px',
+                  border: '3px solid green',
+                }}
+                width="640"
+                height="480"
+              />
+              {scanning ? (
+                <BarcodeScanner
+                  scannerRef={scannerRef}
+                  onDetected={result =>
+                    dispatch(actions.codeResultLoaded(result))
+                  }
+                />
+              ) : null}
+            </div>
+          </Col>
+          <Col md="1">
+            <Button onClick={() => dispatch(actions.setScanning(!scanning))}>
+              {scanning ? 'Stop' : 'Start'}
+            </Button>
+          </Col>
+        </Row>
       </Container>
       <Container>
         <Row>
