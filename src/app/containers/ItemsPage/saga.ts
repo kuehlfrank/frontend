@@ -4,12 +4,13 @@ import {
   selectFormItemName,
   selectFormItemQuantity,
   selectFormItemUnit,
+  selectScanResults,
   selectToken,
   selectUserId,
 } from './selectors';
 import { actions } from './slice';
 import { Item } from 'types/Item';
-import { ItemErrorType } from './types';
+import { CodeResult, ItemErrorType } from './types';
 import { Inventory } from 'types/Inventory';
 const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 
@@ -51,7 +52,23 @@ export function* addItem() {
   } catch (err) {}
 }
 
+export function* getScannedItemInfo() {
+  const codeResult: CodeResult = yield select(selectScanResults);
+  const result = codeResult.codeResult[0];
+
+  const requestURL = `https://world.openfoodfacts.org/api/v0/product/${result.code}.json`;
+
+  try {
+    const response = yield call(request, requestURL);
+
+    put(actions.changeItemName(response.product_name));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export function* itemsRepoSaga() {
   yield takeLatest(actions.loadItems.type, getItems);
   yield takeEvery(actions.addItem.type, addItem);
+  yield takeLatest(actions.codeResultLoaded.type, getScannedItemInfo);
 }
