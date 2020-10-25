@@ -56,9 +56,11 @@ export function* getScannedItemInfo() {
   const codeResult = yield select(selectScanResult);
 
   const requestURL = `https://world.openfoodfacts.org/api/v0/product/${codeResult}.json`;
+  console.log(requestURL);
 
   try {
     const response = yield call(request, requestURL);
+    console.log(response);
 
     put(actions.changeItemName(response.product_name));
   } catch (err) {
