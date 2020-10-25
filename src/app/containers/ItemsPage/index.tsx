@@ -198,34 +198,34 @@ export function ItemsPage() {
       </Container>
       <Container>
         <Row>
-          {scanning ? (
-            <Col md="11">
-              <div
-                ref={scannerRef}
+          <Col md="11">
+            <div
+              ref={scannerRef}
+              style={{
+                position: 'relative',
+                border: '3px solid red',
+              }}
+            >
+              <canvas
+                className="drawingBuffer"
                 style={{
-                  position: 'relative',
-                  border: '3px solid red',
+                  position: 'absolute',
+                  top: '0px',
+                  border: '3px solid green',
                 }}
-              >
-                <canvas
-                  className="drawingBuffer"
-                  style={{
-                    position: 'absolute',
-                    top: '0px',
-                    border: '3px solid green',
-                  }}
-                  width="640"
-                  height="480"
-                />
+                width="640"
+                height="480"
+              />
+              {scanning ? (
                 <BarcodeScanner
                   scannerRef={scannerRef}
                   onDetected={result =>
                     dispatch(actions.codeResultLoaded(result))
                   }
                 />
-              </div>
-            </Col>
-          ) : null}
+              ) : null}
+            </div>
+          </Col>
           <Col md="1">
             <Button onClick={() => dispatch(actions.setScanning(!scanning))}>
               {scanning ? 'Stop' : 'Start'}
