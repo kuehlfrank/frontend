@@ -55,11 +55,11 @@ export function* addItem() {
 
 export function* getScannedItemInfo() {
   const codeResult = yield select(selectScanResult);
-  const token: string = yield select(selectToken);
+
   const requestURL = `https://world.openfoodfacts.org/api/v0/product/${codeResult}.json`;
 
   try {
-    const response = yield call(requestPrivate, requestURL, token);
+    const response = yield call(request, requestURL);
 
     yield put(actions.changeItemName(response.product.product_name));
     let quantity: string = response.product.quantity.split(' ') as string;
@@ -73,8 +73,9 @@ export function* getScannedItemInfo() {
 export function* getUnits() {
   const requestURL = `${API_URL}/units`;
 
+  const token = yield select(selectToken);
   try {
-    const response: Unit[] = yield call(request, requestURL);
+    const response: Unit[] = yield call(requestPrivate, requestURL, token);
     console.debug(response);
     yield put(actions.unitsLoaded(response));
   } catch (err) {
