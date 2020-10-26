@@ -82,8 +82,7 @@ export function* getUnits() {
 
   const token = yield select(selectToken);
   try {
-    const response: Unit[] = yield call(requestPrivate, requestURL, token);
-    console.debug(response);
+    const response = yield call(requestPrivate, requestURL, token);
     yield put(actions.unitsLoaded(response));
   } catch (err) {
     console.error(err);
