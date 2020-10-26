@@ -25,8 +25,7 @@ const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 
 export function* getItems() {
   const token: string = yield select(selectToken);
-  const userId: string = encodeURIComponent(yield select(selectUserId));
-  const requestURL = `${API_URL}/inventory?userId=${userId}`;
+  const requestURL = `${API_URL}/inventory`;
   try {
     const inventory: Inventory = yield call(requestPrivate, requestURL, token);
     let items: Item[] = inventory.inventoryEntries.map(e => ({
