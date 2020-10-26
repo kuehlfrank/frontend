@@ -6,7 +6,7 @@ import { Unit } from 'types/Unit';
 
 export const initialState: ItemsPageState = {
   formItem: { name: '', quantity: 0, unit: null, alternative_names: null },
-  units: undefined,
+  units: [],
   validated: false,
   items: [],
   loading: false,

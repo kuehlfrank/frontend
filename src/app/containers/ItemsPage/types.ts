@@ -14,7 +14,7 @@ export interface ItemsFormState {
   validated: boolean;
   loading: boolean;
   items: Item[];
-  units?: Unit[] | null | undefined;
+  units: Unit[];
   error?: ItemErrorType | null;
   token?: string | null;
   userId?: string | null;
