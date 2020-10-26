@@ -2,9 +2,11 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { CodeResult, ItemErrorType, ItemsPageState } from './types';
 import { Item } from 'types/Item';
+import { Unit } from 'types/Unit';
 
 export const initialState: ItemsPageState = {
-  formItem: { name: '', quantity: 0, unit: '' },
+  formItem: { name: '', quantity: 0, unit: null, alternative_names: null },
+  units: [],
   validated: false,
   items: [],
   loading: false,
@@ -59,6 +61,9 @@ const itemsFormSlice = createSlice({
     codeResultLoaded(state, action: PayloadAction<string>) {
       state.scanning = false;
       state.result = action.payload;
+    },
+    unitsLoaded(state, action: PayloadAction<Unit[]>) {
+      state.units = action.payload;
     },
   },
 });

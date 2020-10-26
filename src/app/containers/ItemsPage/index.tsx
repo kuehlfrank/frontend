@@ -13,6 +13,7 @@ import {
   selectFormItemQuantity,
   selectValidated,
   selectScanning,
+  selectUnits,
 } from './selectors';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -29,6 +30,7 @@ import {
 import { sliceKey, reducer, actions } from './slice';
 import { Item } from 'types/Item';
 import { ItemElement } from './ItemElement';
+import { Unit } from 'types/Unit';
 
 export function ItemsPage() {
   const { getAccessTokenSilently, user } = useAuth0();
@@ -46,6 +48,7 @@ export function ItemsPage() {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const scanning = useSelector(selectScanning);
+  const units: Unit[] = useSelector(selectUnits);
   const scannerRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -74,6 +77,7 @@ export function ItemsPage() {
   };
 
   const onChangeFormItemUnit = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(evt.currentTarget.value);
     dispatch(actions.changeItemUnit(evt.currentTarget.value));
   };
 
@@ -161,10 +165,14 @@ export function ItemsPage() {
                 </InputGroup.Prepend>
                 <Form.Control
                   type="text"
-                  value={formItemUnit}
+                  as="select"
                   onChange={onChangeFormItemUnit}
                   required
-                />
+                >
+                  {units.map(unit => {
+                    return <option value={unit.unitId}>{unit.label}</option>;
+                  })}
+                </Form.Control>
                 <Form.Control.Feedback type="invalid">
                   Please give an unit.
                 </Form.Control.Feedback>

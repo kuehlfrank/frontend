@@ -60,3 +60,8 @@ export const selectScanResult = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.result,
 );
+
+export const selectUnits = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.units,
+);

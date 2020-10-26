@@ -12,6 +12,7 @@ import { actions } from './slice';
 import { Item } from 'types/Item';
 import { CodeResult, ItemErrorType } from './types';
 import { Inventory } from 'types/Inventory';
+import { Unit } from 'types/Unit';
 const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 
 export function* getItems() {
@@ -23,7 +24,7 @@ export function* getItems() {
     let items: Item[] = inventory.inventoryEntries.map(e => ({
       name: e.ingredient.name,
       quantity: e.amount,
-      unit: e.unit.label,
+      unit: e.unit,
     }));
 
     if (items?.length > 0) {
@@ -39,7 +40,7 @@ export function* getItems() {
 export function* addItem() {
   const token: string = yield select(selectToken);
   const userId: string = yield select(selectUserId);
-  const requestURL = `${API_URL}/inventory?userId=${userId}`;
+  const requestURL = `${API_URL}/inventory/${userId}/inventoryEntry`;
   const item: Item = {
     name: yield select(selectFormItemName),
     quantity: yield select(selectFormItemQuantity),
@@ -69,8 +70,21 @@ export function* getScannedItemInfo() {
   }
 }
 
+export function* getUnits() {
+  const requestURL = `${API_URL}/units`;
+
+  try {
+    const response: Unit[] = yield call(request, requestURL);
+    console.debug(response);
+    yield put(actions.unitsLoaded(response));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export function* itemsRepoSaga() {
   yield takeLatest(actions.loadItems.type, getItems);
+  yield takeLatest(actions.loadItems.type, getUnits);
   yield takeEvery(actions.addItem.type, addItem);
   yield takeLatest(actions.codeResultLoaded.type, getScannedItemInfo);
 }
