@@ -20,6 +20,7 @@ export interface ItemsFormState {
   userId?: string | null;
   scanning: boolean;
   result?: string | null;
+  scanModalShow: boolean;
 }
 
 export enum ItemErrorType {

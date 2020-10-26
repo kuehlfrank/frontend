@@ -14,6 +14,7 @@ import {
   selectValidated,
   selectScanning,
   selectUnits,
+  selectScanModalShow,
 } from './selectors';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -26,6 +27,7 @@ import {
   InputGroup,
   Spinner,
   Alert,
+  Modal,
 } from 'react-bootstrap';
 import { sliceKey, reducer, actions } from './slice';
 import { Item } from 'types/Item';
@@ -49,6 +51,7 @@ export function ItemsPage() {
   const error = useSelector(selectError);
   const scanning = useSelector(selectScanning);
   const units = useSelector(selectUnits);
+  const scanModalShow = useSelector(selectScanModalShow);
   const scannerRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -207,32 +210,41 @@ export function ItemsPage() {
       <Container>
         <Row>
           <Col md="11">
-            <div
-              ref={scannerRef}
-              style={{
-                position: 'relative',
-                border: '3px solid red',
-              }}
+            <Modal
+              show={scanModalShow}
+              onHide={() => actions.setScanModalShow(false)}
             >
-              <canvas
-                className="drawingBuffer"
-                style={{
-                  position: 'absolute',
-                  top: '0px',
-                  border: '3px solid green',
+              <Modal.Header closeButton>
+                <Modal.Title>Barcode Scanner</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div ref={scannerRef}>
+                  <video>
+                    <canvas
+                      className="drawingBuffer"
+                      width="640"
+                      height="480"
+                    />
+                  </video>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="danger"
+                  onClick={() => actions.setScanModalShow(false)}
+                >
+                  Cancel
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            {scanning ? (
+              <BarcodeScanner
+                scannerRef={scannerRef}
+                onDetected={result => {
+                  dispatch(actions.codeResultLoaded(result));
                 }}
-                width="640"
-                height="480"
               />
-              {scanning ? (
-                <BarcodeScanner
-                  scannerRef={scannerRef}
-                  onDetected={result => {
-                    dispatch(actions.codeResultLoaded(result));
-                  }}
-                />
-              ) : null}
-            </div>
+            ) : null}
           </Col>
           <Col md="1">
             <Button onClick={() => dispatch(actions.setScanning(!scanning))}>

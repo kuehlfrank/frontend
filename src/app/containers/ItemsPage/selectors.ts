@@ -65,3 +65,8 @@ export const selectUnits = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.units,
 );
+
+export const selectScanModalShow = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.scanModalShow,
+);
