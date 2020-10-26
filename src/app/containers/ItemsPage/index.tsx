@@ -164,7 +164,6 @@ export function ItemsPage() {
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <Form.Control
-                  type="text"
                   as="select"
                   onChange={onChangeFormItemUnit}
                   required
