@@ -168,9 +168,9 @@ export function ItemsPage() {
                   onChange={onChangeFormItemUnit}
                   required
                 >
-                  {units?.map(unit => {
-                    return <option value={unit.unitId}>{unit.label}</option>;
-                  })}
+                  {units?.map(unit => (
+                    <option value={unit.unitId}>{unit.label}</option>
+                  ))}
                 </Form.Control>
                 <Form.Control.Feedback type="invalid">
                   Please give an unit.
