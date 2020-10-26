@@ -5,7 +5,7 @@ import { Item } from 'types/Item';
 import { Unit } from 'types/Unit';
 
 export const initialState: ItemsPageState = {
-  formItem: { name: '', quantity: 0, unit: null, alternative_names: null },
+  formItem: { name: '', quantity: 0, unit: undefined, alternative_names: null },
   units: [],
   validated: false,
   items: [],
@@ -23,8 +23,9 @@ const itemsFormSlice = createSlice({
     changeItemName(state, action: PayloadAction<string>) {
       state.formItem.name = action.payload;
     },
-    changeItemUnit(state, action: PayloadAction<string>) {
-      state.formItem.unit = action.payload;
+    changeItemUnit(state, action: PayloadAction<number>) {
+      let unit = state.units.find(unit => unit.unitId === action.payload);
+      state.formItem.unit = unit;
     },
     changeItemQuantity(state, action: PayloadAction<number>) {
       state.formItem.quantity = action.payload;

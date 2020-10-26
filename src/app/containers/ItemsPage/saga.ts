@@ -13,6 +13,7 @@ import {
   selectFormItemUnit,
   selectScanResult,
   selectToken,
+  selectUnits,
   selectUserId,
 } from './selectors';
 import { actions } from './slice';
@@ -71,7 +72,10 @@ export function* getScannedItemInfo() {
     yield put(actions.changeItemName(response.product.product_name));
     let quantity: string = response.product.quantity.split(' ') as string;
     yield put(actions.changeItemQuantity(parseInt(quantity[0])));
-    yield put(actions.changeItemUnit(quantity[1]));
+    let units = yield select(selectUnits);
+    yield put(
+      actions.changeItemUnit(units.find(unit => unit.label === quantity[1])),
+    );
   } catch (err) {
     console.error(err);
   }

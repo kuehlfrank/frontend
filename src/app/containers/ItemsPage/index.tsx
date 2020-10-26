@@ -78,7 +78,7 @@ export function ItemsPage() {
 
   const onChangeFormItemUnit = (evt: React.ChangeEvent<HTMLInputElement>) => {
     console.log(evt.currentTarget.value);
-    dispatch(actions.changeItemUnit(evt.currentTarget.value));
+    dispatch(actions.changeItemUnit(parseInt(evt.currentTarget.value)));
   };
 
   const onChangeFormItemQuantity = (

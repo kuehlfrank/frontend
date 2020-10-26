@@ -1,6 +1,6 @@
 export interface Item {
   name: string;
-  unit?: Unit | null;
+  unit?: Unit | undefined;
   quantity: number;
   alternative_names?: string[] | null;
 }
