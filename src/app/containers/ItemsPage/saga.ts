@@ -55,11 +55,11 @@ export function* addItem() {
 
 export function* getScannedItemInfo() {
   const codeResult = yield select(selectScanResult);
-
+  const token: string = yield select(selectToken);
   const requestURL = `https://world.openfoodfacts.org/api/v0/product/${codeResult}.json`;
 
   try {
-    const response = yield call(request, requestURL);
+    const response = yield call(requestPrivate, requestURL, token);
 
     yield put(actions.changeItemName(response.product.product_name));
     let quantity: string = response.product.quantity.split(' ') as string;
