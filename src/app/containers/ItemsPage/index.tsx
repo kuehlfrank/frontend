@@ -167,7 +167,7 @@ export function ItemsPage() {
                   as="select"
                   onChange={onChangeFormItemUnit}
                   required
-                  value={formItemUnit.unitId}
+                  value={formItemUnit?.unitId ?? 0}
                 >
                   {units.map(unit => (
                     <option value={unit.unitId}>{unit.label}</option>
