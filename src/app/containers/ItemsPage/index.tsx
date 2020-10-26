@@ -48,7 +48,7 @@ export function ItemsPage() {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const scanning = useSelector(selectScanning);
-  const units: Unit[] = useSelector(selectUnits);
+  const units = useSelector(selectUnits);
   const scannerRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -169,7 +169,7 @@ export function ItemsPage() {
                   onChange={onChangeFormItemUnit}
                   required
                 >
-                  {units.map(unit => {
+                  {units?.map(unit => {
                     return <option value={unit.unitId}>{unit.label}</option>;
                   })}
                 </Form.Control>
