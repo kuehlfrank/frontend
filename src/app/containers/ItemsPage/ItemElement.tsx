@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 interface Props {
   name: string;
@@ -18,6 +18,9 @@ export function ItemElement({ name, unit, quantity }: Props) {
           {quantity} {unit}
         </p>
       </Card.Body>
+      <Card.Footer>
+        <Button variant="danger">Delete</Button>
+      </Card.Footer>
     </Card>
   );
 }
