@@ -63,6 +63,7 @@ const itemsFormSlice = createSlice({
     },
     codeResultLoaded(state, action: PayloadAction<string>) {
       state.scanning = false;
+      state.scanModalShow = false;
       state.result = action.payload;
     },
     unitsLoaded(state, action: PayloadAction<Unit[]>) {
