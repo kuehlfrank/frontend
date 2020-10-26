@@ -181,7 +181,7 @@ export function ItemsPage() {
                 </Form.Control.Feedback>
               </InputGroup>
             </FormGroup>
-            <FormGroup as={Col} md="4" controlId="ValidationQuantity">
+            <FormGroup as={Col} md="3" controlId="ValidationQuantity">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Quantity</InputGroup.Text>
@@ -200,8 +200,15 @@ export function ItemsPage() {
               </InputGroup>
             </FormGroup>
             <FormGroup as={Col}>
-              <Button type="submit" className="float-right">
+              <Button type="submit" className="float-left">
                 Add
+              </Button>
+              <Button
+                variant="success"
+                className="float-right"
+                onClick={() => dispatch(actions.setScanning(!scanning))}
+              >
+                {scanning ? 'Stop' : 'Scan'}
               </Button>
             </FormGroup>
           </Form.Row>
@@ -245,11 +252,6 @@ export function ItemsPage() {
                 }}
               />
             ) : null}
-          </Col>
-          <Col md="1">
-            <Button onClick={() => dispatch(actions.setScanning(!scanning))}>
-              {scanning ? 'Stop' : 'Start'}
-            </Button>
           </Col>
         </Row>
       </Container>
