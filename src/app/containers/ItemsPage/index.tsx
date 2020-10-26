@@ -212,7 +212,7 @@ export function ItemsPage() {
           <Col md="11">
             <Modal
               show={scanModalShow}
-              onHide={() => actions.setScanModalShow(false)}
+              onHide={() => dispatch(actions.setScanning(false))}
             >
               <Modal.Header closeButton>
                 <Modal.Title>Barcode Scanner</Modal.Title>
@@ -231,7 +231,7 @@ export function ItemsPage() {
               <Modal.Footer>
                 <Button
                   variant="danger"
-                  onClick={() => actions.setScanModalShow(false)}
+                  onClick={() => dispatch(actions.setScanning(false))}
                 >
                   Cancel
                 </Button>

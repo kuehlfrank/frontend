@@ -59,7 +59,7 @@ const itemsFormSlice = createSlice({
     },
     setScanning(state, action: PayloadAction<boolean>) {
       state.scanning = action.payload;
-      state.scanModalShow = true;
+      state.scanModalShow = action.payload;
     },
     codeResultLoaded(state, action: PayloadAction<string>) {
       state.scanning = false;
@@ -67,9 +67,6 @@ const itemsFormSlice = createSlice({
     },
     unitsLoaded(state, action: PayloadAction<Unit[]>) {
       state.units = action.payload;
-    },
-    setScanModalShow(state, action: PayloadAction<boolean>) {
-      state.scanModalShow = action.payload;
     },
   },
 });
