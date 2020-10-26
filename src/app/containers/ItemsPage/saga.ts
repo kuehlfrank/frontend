@@ -94,6 +94,8 @@ export function* getUnits() {
 }
 
 export function* itemsRepoSaga() {
+  yield takeLatest(actions.loadItems.type, getItems);
+  yield takeLatest(actions.loadItems.type, getUnits);
   yield takeLatest(actions.loadItems.type, yield all([getItems, getUnits]));
   yield takeEvery(actions.addItem.type, addItem);
   yield takeLatest(actions.codeResultLoaded.type, getScannedItemInfo);
