@@ -57,7 +57,7 @@ const BarcodeScanner = ({
       }
       const err = getMedianOfCodeErrors(result.codeResult.decodedCodes);
       // if Quagga is at least 75% certain that it read correctly, then accept the code.
-      if (err < 0.1) {
+      if (err < 0.2) {
         onDetected(result.codeResult.code);
       }
     },

@@ -8,9 +8,11 @@ import {
 } from 'redux-saga/effects';
 import { postPrivate, request, requestPrivate } from 'utils/request';
 import {
+  selectFormItemAlternativeNames,
   selectFormItemName,
   selectFormItemQuantity,
   selectFormItemUnit,
+  selectItemImgSrc,
   selectScanResult,
   selectToken,
   selectUnits,
@@ -54,7 +56,8 @@ export function* addItem() {
     name: yield select(selectFormItemName),
     quantity: yield select(selectFormItemQuantity),
     unitId: unit.unitId,
-    alternative_names: [],
+    imgSrc: yield select(selectItemImgSrc),
+    alternative_names: yield select(selectFormItemAlternativeNames),
   };
 
   try {

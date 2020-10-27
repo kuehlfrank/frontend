@@ -80,3 +80,8 @@ export const selectItemImgSrc = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.formItem.imgSrc,
 );
+
+export const selectFormItemAlternativeNames = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.formItem.alternative_names,
+);
