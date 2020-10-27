@@ -29,7 +29,13 @@ const defaultLocatorSettings = {
   halfSample: true,
 };
 
-const defaultDecoders = ['ean_reader'];
+const defaultDecoders = [
+  'ean_reader',
+  'code_128_reader',
+  'ean_8_reader',
+  'code_39_vin_reader',
+  'code_39',
+];
 
 const BarcodeScanner = ({
   onDetected,

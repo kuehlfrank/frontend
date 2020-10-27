@@ -80,6 +80,15 @@ export function* getScannedItemInfo() {
     yield put(
       actions.changeItemUnit(units.find(unit => unit.label === quantity[1])),
     );
+    yield put(actions.changeItemImgSrc(response.product.image_front_url));
+    if (response.product.generic_name_de) {
+      yield put(
+        actions.addItemAlternativeName(response.product.generic_name_de),
+      );
+    }
+    if (response.product.generic_name) {
+      yield put(actions.addItemAlternativeName(response.product.generic_name));
+    }
   } catch (err) {
     console.error(err);
   }

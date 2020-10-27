@@ -6,6 +6,11 @@ import { initialState } from './slice';
 
 const selectDomain = (state: RootState) => state.itemForm || initialState;
 
+export const selectFormItem = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.formItem,
+);
+
 export const selectToken = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.token,
@@ -69,4 +74,9 @@ export const selectUnits = createSelector(
 export const selectScanModalShow = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.scanModalShow,
+);
+
+export const selectItemImgSrc = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.formItem.imgSrc,
 );

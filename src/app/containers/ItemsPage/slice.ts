@@ -5,7 +5,13 @@ import { Item } from 'types/Item';
 import { Unit } from 'types/Unit';
 
 export const initialState: ItemsPageState = {
-  formItem: { name: '', quantity: 0, unit: undefined, alternative_names: null },
+  formItem: {
+    name: '',
+    quantity: 0,
+    unit: undefined,
+    alternative_names: undefined,
+    imgSrc: undefined,
+  },
   units: [],
   validated: false,
   items: [],
@@ -68,6 +74,21 @@ const itemsFormSlice = createSlice({
     },
     unitsLoaded(state, action: PayloadAction<Unit[]>) {
       state.units = action.payload;
+    },
+    changeItemImgSrc(state, action: PayloadAction<string>) {
+      state.formItem.imgSrc = action.payload;
+    },
+    changeItemAlternativeName(state, action: PayloadAction<string[]>) {
+      state.formItem.alternative_names = action.payload;
+    },
+    addItemAlternativeName(state, action: PayloadAction<string>) {
+      if (
+        state.formItem.alternative_names === undefined &&
+        state.formItem.alternative_names === null
+      ) {
+        state.formItem.alternative_names = [] as string[];
+      }
+      state.formItem.alternative_names?.push(action.payload);
     },
   },
 });

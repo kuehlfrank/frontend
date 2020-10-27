@@ -15,6 +15,7 @@ import {
   selectScanning,
   selectUnits,
   selectScanModalShow,
+  selectFormItem,
 } from './selectors';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -271,12 +272,7 @@ export function ItemsPage() {
           )}
           {items.map((item, i) => (
             <Col md="3" key={i}>
-              <ItemElement
-                name={item.name}
-                unit={item.unit.label}
-                quantity={item.quantity}
-                key={i}
-              />
+              <ItemElement item={item} key={i} />
             </Col>
           ))}
         </Row>

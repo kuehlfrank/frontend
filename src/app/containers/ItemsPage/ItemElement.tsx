@@ -1,25 +1,29 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, CardImg } from 'react-bootstrap';
+import { Item } from 'types/Item';
 
 interface Props {
-  name: string;
-  unit: string;
-  quantity: number;
+  item: Item;
 }
 
-export function ItemElement({ name, unit, quantity }: Props) {
+export function ItemElement({ item }: Props) {
   return (
-    <Card>
+    <Card className="mb-4">
       <Card.Header>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>{item.name}</Card.Title>
       </Card.Header>
+      {item.imgSrc !== null && item.imgSrc !== undefined ? (
+        <CardImg src={item.imgSrc} />
+      ) : null}
       <Card.Body>
         <p>
-          {quantity} {unit}
+          {item.quantity} {item.unit?.label}
         </p>
       </Card.Body>
       <Card.Footer>
-        <Button variant="danger">Delete</Button>
+        <Button variant="danger" className="float-right">
+          Delete
+        </Button>
       </Card.Footer>
     </Card>
   );
