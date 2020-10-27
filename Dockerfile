@@ -15,8 +15,8 @@ RUN npm install --silent
 
 # add app
 COPY . ./
-RUN ls -la
 RUN NODE_ENV=production npm run build:docker
+RUN ls -la ./build
 
 FROM node:12-alpine
 RUN npm install serve -g --silent
