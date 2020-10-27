@@ -1,5 +1,8 @@
 # pull official base image
-FROM node:12-alpine
+FROM node:12-alpine AS builder
+
+ARG REACT_APP_ENV
+ENV REACT_APP_ENV=${REACT_APP_ENV}
 
 # set working directory
 WORKDIR /app
@@ -8,12 +11,22 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
+RUN npm install react-scripts -g --silent
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install --silent
 
 # add app
 COPY . ./
+RUN ls -la
+RUN NODE_ENV=production REACT_APP_ENV=$REACT_APP_ENV npm run build
+
+FROM node:12-alpine
+RUN npm install serve -g --silent
+WORKDIR /app
+COPY --from=builder /app/build .
+
+EXPOSE 3000
 
 # start app
-CMD ["npm", "start"]
+CMD ["serve", "-p", "3000", "-s", "."]
