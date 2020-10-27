@@ -20,8 +20,8 @@ function getMedianOfCodeErrors(decodedCodes) {
 }
 
 const defaultConstraints = {
-  width: 640,
-  height: 480,
+  height: 640,
+  width: 480,
 };
 
 const defaultLocatorSettings = {
@@ -31,11 +31,11 @@ const defaultLocatorSettings = {
 
 const defaultDecoders = [
   'ean_reader',
-  'code_128_reader',
   'ean_8_reader',
-  'code_39_vin_reader',
   'code_39_reader',
-  'codebar_reader',
+  'code_39_vin_reader',
+  'code_128_reader',
+  'codabar_reader',
 ];
 
 const BarcodeScanner = ({
@@ -57,7 +57,7 @@ const BarcodeScanner = ({
       }
       const err = getMedianOfCodeErrors(result.codeResult.decodedCodes);
       // if Quagga is at least 75% certain that it read correctly, then accept the code.
-      if (err < 0.2) {
+      if (err < 0.1) {
         onDetected(result.codeResult.code);
       }
     },

@@ -227,18 +227,24 @@ export function ItemsPage() {
               </Modal.Header>
               <Modal.Body>
                 <div ref={scannerRef}>
-                  {/* <video style={{ width: window.innerWidth, height: 480, border: '3px solid orange' }}/> */}
+                  <video
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      // border: '3px solid orange',
+                    }}
+                  />
                   <canvas
                     className="drawingBuffer"
                     style={{
                       position: 'absolute',
                       top: '0px',
-                      // left: '0px',
-                      // height: '100%',
-                      // width: '100%',
+                      left: '0px',
+                      height: '100%',
+                      width: '100%',
                     }}
-                    width="640"
-                    height="480"
+                    width="480"
+                    height="640"
                   />
                 </div>
               </Modal.Body>

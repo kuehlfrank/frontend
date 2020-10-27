@@ -75,8 +75,10 @@ export function* getScannedItemInfo() {
 
   try {
     const response = yield call(request, requestURL);
+    if (response.product.product_name_de !== '')
+      yield put(actions.changeItemName(response.product.product_name_de));
+    else yield put(actions.changeItemName(response.product.product_name));
 
-    yield put(actions.changeItemName(response.product.product_name));
     let quantity: string = response.product.quantity.split(' ') as string;
     yield put(actions.changeItemQuantity(parseInt(quantity[0])));
     let units = yield select(selectUnits);
@@ -84,12 +86,14 @@ export function* getScannedItemInfo() {
       actions.changeItemUnit(units.find(unit => unit.label === quantity[1])),
     );
     yield put(actions.changeItemImgSrc(response.product.image_front_url));
-    if (response.product.generic_name_de) {
+    if (response.product.generic_name_de !== '') {
       yield put(
         actions.addItemAlternativeName(response.product.generic_name_de),
       );
+      console.log(response.product.generic_name_de);
     }
-    if (response.product.generic_name) {
+    if (response.product.generic_name !== '') {
+      console.log(response.product.generic_name);
       yield put(actions.addItemAlternativeName(response.product.generic_name));
     }
   } catch (err) {

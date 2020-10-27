@@ -83,7 +83,7 @@ const itemsFormSlice = createSlice({
     },
     addItemAlternativeName(state, action: PayloadAction<string>) {
       if (
-        state.formItem.alternative_names === undefined &&
+        state.formItem.alternative_names === undefined ||
         state.formItem.alternative_names === null
       ) {
         state.formItem.alternative_names = [] as string[];
