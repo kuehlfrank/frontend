@@ -80,9 +80,11 @@ export async function postPrivate(
   }
   options.method = 'POST';
   options.headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
   };
-  options.body = data.json();
+  options.body = JSON.stringify(data);
   const fetchResponse = await fetch(url, options);
   const response = checkStatus(fetchResponse);
   return parseJSON(response);

@@ -49,16 +49,20 @@ export function* addItem() {
   const token: string = yield select(selectToken);
   const userId: string = yield select(selectUserId);
   const requestURL = `${API_URL}/inventory/${userId}/inventoryEntry`;
-  const item: Item = {
+  const unit = yield select(selectFormItemUnit);
+  const item: any = {
     name: yield select(selectFormItemName),
     quantity: yield select(selectFormItemQuantity),
-    unit: yield select(selectFormItemUnit),
+    unitId: unit.unitId,
+    alternative_names: [],
   };
 
   try {
     const response = yield call(postPrivate, requestURL, token, item);
     yield put(actions.loadItems());
-  } catch (err) {}
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export function* getScannedItemInfo() {
