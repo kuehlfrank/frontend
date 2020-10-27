@@ -34,7 +34,8 @@ const defaultDecoders = [
   'code_128_reader',
   'ean_8_reader',
   'code_39_vin_reader',
-  'code_39',
+  'code_39_reader',
+  'codebar_reader',
 ];
 
 const BarcodeScanner = ({
