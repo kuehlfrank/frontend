@@ -1,9 +1,6 @@
 # pull official base image
 FROM node:12-alpine AS builder
 
-ARG REACT_APP_ENV
-ENV REACT_APP_ENV=${REACT_APP_ENV}
-
 # set working directory
 WORKDIR /app
 
@@ -19,7 +16,7 @@ RUN npm install --silent
 # add app
 COPY . ./
 RUN ls -la
-RUN NODE_ENV=production REACT_APP_ENV=$REACT_APP_ENV npm run build
+RUN NODE_ENV=production npm run build:docker
 
 FROM node:12-alpine
 RUN npm install serve -g --silent
