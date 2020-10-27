@@ -3,14 +3,14 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from 'react-bootstrap';
 
 export function SignupButton() {
-  const { loginWithPopup } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   return (
     <>
       <Button
         type="button"
         variant="secondary"
         onClick={() =>
-          loginWithPopup({
+          loginWithRedirect({
             screen_hint: 'signup',
           })
         }
