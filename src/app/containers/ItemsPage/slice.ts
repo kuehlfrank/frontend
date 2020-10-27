@@ -30,7 +30,10 @@ const itemsFormSlice = createSlice({
     changeItemName(state, action: PayloadAction<string>) {
       state.formItem.name = action.payload;
     },
-    changeItemUnit(state, action: PayloadAction<number>) {
+    changeItemUnit(state, action: PayloadAction<Unit>) {
+      state.formItem.unit = action.payload;
+    },
+    setItemUnitById(state, action: PayloadAction<number>) {
       let unit = state.units.find(unit => unit.unitId === action.payload);
       state.formItem.unit = unit;
     },

@@ -50,7 +50,9 @@ export function* getItems() {
 export function* addItem() {
   const token: string = yield select(selectToken);
   const userId: string = yield select(selectUserId);
-  const requestURL = `${API_URL}/inventory/${userId}/inventoryEntry`;
+  const requestURL = `${API_URL}/inventory/${encodeURIComponent(
+    userId,
+  )}/inventoryEntry`;
   const unit = yield select(selectFormItemUnit);
   const item: any = {
     name: yield select(selectFormItemName),
@@ -79,11 +81,13 @@ export function* getScannedItemInfo() {
       yield put(actions.changeItemName(response.product.product_name_de));
     else yield put(actions.changeItemName(response.product.product_name));
 
-    let quantity: string = response.product.quantity.split(' ') as string;
-    yield put(actions.changeItemQuantity(parseInt(quantity[0])));
-    let units = yield select(selectUnits);
+    let quantity: string = response.product.quantity;
+    let unitLabel = quantity.match('\\D.*')![0];
+    let quantityNum = quantity.match('.*\\d')![0];
+    yield put(actions.changeItemQuantity(parseInt(quantityNum)));
+    const units = yield select(selectUnits);
     yield put(
-      actions.changeItemUnit(units.find(unit => unit.label === quantity[1])),
+      actions.changeItemUnit(units.find(unit => unit.label === unitLabel)),
     );
     yield put(actions.changeItemImgSrc(response.product.image_front_url));
     if (response.product.generic_name_de !== '') {
