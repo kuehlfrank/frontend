@@ -273,8 +273,9 @@ export function ItemsPage() {
             <Col md="3" key={i}>
               <ItemElement
                 name={item.name}
-                unit={item.unit}
+                unit={item.unit.label}
                 quantity={item.quantity}
+                key={i}
               />
             </Col>
           ))}
