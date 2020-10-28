@@ -1,4 +1,4 @@
 export interface Unit {
-  unitId: number;
+  unitId: string;
   label: string;
 }

@@ -2,9 +2,9 @@ import { Ingredient } from './Ingredient';
 import { Unit } from './Unit';
 
 export interface InventoryEntry {
-  inventoryEntryId: number;
+  inventoryEntryId: string;
   inventory: {
-    inventoryId: number;
+    inventoryId: string;
   };
   ingredient: Ingredient;
   amount: number;

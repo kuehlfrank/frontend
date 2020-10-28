@@ -1,5 +1,5 @@
 export interface Ingredient {
-  ingredientId: number;
+  ingredientId: string;
   name: string;
   common: boolean;
 }
