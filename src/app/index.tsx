@@ -24,6 +24,7 @@ import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { ItemsPage } from './containers/ItemsPage/Loadable';
 import { Auth0ProviderWithHistory } from 'auth/Auth0ProviderWithHistory';
 import { ProtectedRoute } from 'auth/ProtectedRoute';
+import '../scss/custom.scss';
 
 export function App() {
   const history = createBrowserHistory();
@@ -32,12 +33,6 @@ export function App() {
       <Router history={history}>
         <Auth0ProviderWithHistory>
           <Helmet titleTemplate="%s - Kühlfrank" defaultTitle="Kühlfrank">
-            <link
-              rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-              integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-              crossOrigin="anonymous"
-            />
             <meta name="description" content="Smartes Kühlschrankmanagement" />
           </Helmet>
           <Route component={NavBar} />

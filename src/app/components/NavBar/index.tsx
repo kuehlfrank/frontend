@@ -7,7 +7,7 @@ import { UserBadge } from '../UserBadge';
 export function NavBar() {
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="/#/home">
           <img
             alt=""

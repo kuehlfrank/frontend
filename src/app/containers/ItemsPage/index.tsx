@@ -141,153 +141,155 @@ export function ItemsPage() {
       <Helmet>
         <title>Items</title>
       </Helmet>
-      <Container>
-        <Form onSubmit={onSubmitForm} noValidate validated={validated}>
-          <Form.Row>
-            <FormGroup as={Col} md="4" controlId="validationName">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Name</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  type="text"
-                  value={formItemName}
-                  onChange={onChangeFormItemName}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please give a name.
-                </Form.Control.Feedback>
-              </InputGroup>
-            </FormGroup>
-            <FormGroup as={Col} md="3" controlId="validationUnit">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text className="input-group-text">
-                    Unit
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  as="select"
-                  onChange={onChangeFormItemUnit}
-                  required
-                  value={formItemUnit?.unitId ?? 0}
-                >
-                  {units.map(unit => (
-                    <option value={unit.unitId}>{unit.label}</option>
-                  ))}
-                </Form.Control>
-                <Form.Control.Feedback type="invalid">
-                  Please give an unit.
-                </Form.Control.Feedback>
-              </InputGroup>
-            </FormGroup>
-            <FormGroup as={Col} md="3" controlId="ValidationQuantity">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Quantity</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  type="number"
-                  value={formItemQuantity}
-                  onChange={onChangeFormItemQuantity}
-                  min="0.001"
-                  step="any"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Give a quantity greater than 0.
-                </Form.Control.Feedback>
-              </InputGroup>
-            </FormGroup>
-            <FormGroup as={Col}>
-              <Button type="submit" className="float-left">
-                Add
-              </Button>
-              <Button
-                variant="success"
-                className="float-right"
-                onClick={() => dispatch(actions.setScanning(!scanning))}
-              >
-                {scanning ? 'Stop' : 'Scan'}
-              </Button>
-            </FormGroup>
-          </Form.Row>
-        </Form>
-      </Container>
-      <Container>
-        <Row>
-          <Col md="11">
-            <Modal
-              show={scanModalShow}
-              onHide={() => dispatch(actions.setScanning(false))}
-            >
-              <Modal.Header closeButton>
-                <Modal.Title>Barcode Scanner</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div ref={scannerRef}>
-                  <video
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      // border: '3px solid orange',
-                    }}
+      <Container className="mt-4">
+        <Container>
+          <Form onSubmit={onSubmitForm} noValidate validated={validated}>
+            <Form.Row>
+              <FormGroup as={Col} md="4" controlId="validationName">
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text>Name</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    type="text"
+                    value={formItemName}
+                    onChange={onChangeFormItemName}
+                    required
                   />
-                  <canvas
-                    className="drawingBuffer"
-                    style={{
-                      position: 'absolute',
-                      top: '0px',
-                      left: '0px',
-                      height: '100%',
-                      width: '100%',
-                    }}
-                    width="480"
-                    height="640"
+                  <Form.Control.Feedback type="invalid">
+                    Please give a name.
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </FormGroup>
+              <FormGroup as={Col} md="3" controlId="validationUnit">
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text className="input-group-text">
+                      Unit
+                    </InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    as="select"
+                    onChange={onChangeFormItemUnit}
+                    required
+                    value={formItemUnit?.unitId ?? 0}
+                  >
+                    {units.map(unit => (
+                      <option value={unit.unitId}>{unit.label}</option>
+                    ))}
+                  </Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    Please give an unit.
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </FormGroup>
+              <FormGroup as={Col} md="3" controlId="ValidationQuantity">
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text>Quantity</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    type="number"
+                    value={formItemQuantity}
+                    onChange={onChangeFormItemQuantity}
+                    min="0.001"
+                    step="any"
+                    required
                   />
-                </div>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  variant="danger"
-                  onClick={() => dispatch(actions.setScanning(false))}
-                >
-                  Cancel
+                  <Form.Control.Feedback type="invalid">
+                    Give a quantity greater than 0.
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </FormGroup>
+              <FormGroup as={Col}>
+                <Button type="submit" className="float-left">
+                  Add
                 </Button>
-              </Modal.Footer>
-            </Modal>
-            {scanning ? (
-              <BarcodeScanner
-                scannerRef={scannerRef}
-                onDetected={result => {
-                  dispatch(actions.codeResultLoaded(result));
-                }}
-              />
-            ) : null}
-          </Col>
-        </Row>
-      </Container>
-      <Container>
-        <Row>
-          {loading && (
-            <Col md="3" key="-2">
-              <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-              </Spinner>
+                <Button
+                  variant="success"
+                  className="float-right"
+                  onClick={() => dispatch(actions.setScanning(!scanning))}
+                >
+                  {scanning ? 'Stop' : 'Scan'}
+                </Button>
+              </FormGroup>
+            </Form.Row>
+          </Form>
+        </Container>
+        <Container>
+          <Row>
+            <Col md="11">
+              <Modal
+                show={scanModalShow}
+                onHide={() => dispatch(actions.setScanning(false))}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Barcode Scanner</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div ref={scannerRef}>
+                    <video
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        // border: '3px solid orange',
+                      }}
+                    />
+                    <canvas
+                      className="drawingBuffer"
+                      style={{
+                        position: 'absolute',
+                        top: '0px',
+                        left: '0px',
+                        height: '100%',
+                        width: '100%',
+                      }}
+                      width="480"
+                      height="640"
+                    />
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="danger"
+                    onClick={() => dispatch(actions.setScanning(false))}
+                  >
+                    Cancel
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              {scanning ? (
+                <BarcodeScanner
+                  scannerRef={scannerRef}
+                  onDetected={result => {
+                    dispatch(actions.codeResultLoaded(result));
+                  }}
+                />
+              ) : null}
             </Col>
-          )}
-          {error !== null && (
-            <Col md="12" key="-1">
-              <Alert variant="danger">{errorString()}</Alert>
-            </Col>
-          )}
-          {items.map((item, i) => (
-            <Col md="3" key={i}>
-              <ItemElement item={item} key={i} />
-            </Col>
-          ))}
-        </Row>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            {loading && (
+              <Col md="3" key="-2">
+                <Spinner animation="border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
+              </Col>
+            )}
+            {error !== null && (
+              <Col md="12" key="-1">
+                <Alert variant="danger">{errorString()}</Alert>
+              </Col>
+            )}
+            {items.map((item, i) => (
+              <Col md="3" key={i}>
+                <ItemElement item={item} key={i} />
+              </Col>
+            ))}
+          </Row>
+        </Container>
       </Container>
     </>
   );
