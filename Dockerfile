@@ -26,4 +26,4 @@ COPY --from=builder /app/build .
 EXPOSE 3000
 
 # start app
-CMD ["serve", "-p", "3000", "-s", "build", "."]
+CMD ["serve", "-p", "3000", "-s", "."]
