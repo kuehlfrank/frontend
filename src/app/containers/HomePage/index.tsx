@@ -10,8 +10,8 @@ export function HomePage() {
       </Helmet>
       <Jumbotron fluid>
         <Container>
-          <h1>Willkommen zu Kühlfrank</h1>
-          <p>Warum wegwerfen?</p>
+          <h1>Kühlfrank</h1>
+          <h2>Warum wegwerfen?</h2>
         </Container>
       </Jumbotron>
       <Row>

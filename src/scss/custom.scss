@@ -7,11 +7,20 @@ body {
 h1 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
+    font-size: 8vh;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 5vh;
+    padding-left: 5vw;
 }
 
 h5 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
+    font-size: 4vh;
 }
 
 $body-bg: #fafafa;
