@@ -75,3 +75,8 @@ export const selectFormItemAlternativeNames = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.formItem.alternative_names,
 );
+
+export const selectItemIdToDelete = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.itemIdToDelete,
+);

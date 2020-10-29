@@ -32,11 +32,12 @@ export function KuehlfrankProvider({ children }) {
     dispatch(actions.beginLoading());
     getAccessTokenSilently()
       .then(t => {
-        dispatch(actions.setToken(t));
         dispatch(actions.setUserId(user.sub));
         dispatch(actions.setUsername(user.name));
+        dispatch(actions.setToken(t));
       })
       .catch(console.error);
+    dispatch(actions.loaded());
   });
   return <>{children}</>;
 }

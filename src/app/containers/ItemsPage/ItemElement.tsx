@@ -4,9 +4,10 @@ import { Item } from 'types/Item';
 
 interface Props {
   item: Item;
+  onDelete?: (string, any) => any;
 }
 
-export function ItemElement({ item }: Props) {
+export function ItemElement({ item, onDelete }: Props) {
   return (
     <Card className="mb-4">
       <Card.Header>
@@ -21,7 +22,15 @@ export function ItemElement({ item }: Props) {
         </p>
       </Card.Body>
       <Card.Footer>
-        <Button variant="danger" className="float-right">
+        <Button
+          variant="danger"
+          className="float-right"
+          onClick={e => {
+            if (onDelete) {
+              onDelete(item.id, e);
+            }
+          }}
+        >
           Delete
         </Button>
       </Card.Footer>

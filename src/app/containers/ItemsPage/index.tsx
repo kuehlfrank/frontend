@@ -36,7 +36,6 @@ import { ItemElement } from './ItemElement';
 import { Unit } from 'types/Unit';
 
 export function ItemsPage() {
-  const { getAccessTokenSilently, user } = useAuth0();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({
     key: sliceKey,
@@ -120,6 +119,10 @@ export function ItemsPage() {
 
   function onDetected(result) {
     dispatch(actions.codeResultLoaded(result));
+  }
+
+  function onDeleteItem(id: string, e) {
+    dispatch(actions.deleteItem(id));
   }
 
   return (
@@ -271,7 +274,11 @@ export function ItemsPage() {
             )}
             {items.map((item, i) => (
               <Col md="3" key={i}>
-                <ItemElement item={item} key={i} />
+                <ItemElement
+                  item={item}
+                  key={i}
+                  onDelete={(id, e) => onDeleteItem(id, e)}
+                />
               </Col>
             ))}
           </Row>

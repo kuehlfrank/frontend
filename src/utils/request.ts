@@ -89,3 +89,22 @@ export async function postPrivate(
   const response = checkStatus(fetchResponse);
   return parseJSON(response);
 }
+
+export async function deletePrivate(
+  url: string,
+  token: string,
+  options?: RequestInit,
+): Promise<{} | { err: ResponseError }> {
+  if (options === undefined) {
+    options = {};
+  }
+  options.method = 'DELETE';
+  options.headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  };
+  const fetchResponse = await fetch(url, options);
+  const response = checkStatus(fetchResponse);
+  return parseJSON(response);
+}

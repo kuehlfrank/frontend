@@ -1,17 +1,24 @@
 import {
   all,
   call,
+  fork,
   put,
   select,
   takeEvery,
   takeLatest,
 } from 'redux-saga/effects';
-import { postPrivate, request, requestPrivate } from 'utils/request';
+import {
+  deletePrivate,
+  postPrivate,
+  request,
+  requestPrivate,
+} from 'utils/request';
 import {
   selectFormItemAlternativeNames,
   selectFormItemName,
   selectFormItemQuantity,
   selectFormItemUnit,
+  selectItemIdToDelete,
   selectItemImgSrc,
   selectScanResult,
   selectUnits,
@@ -31,6 +38,7 @@ export function* getItems() {
   try {
     const inventory: Inventory = yield call(requestPrivate, requestURL, token);
     let items: Item[] = inventory.inventoryEntries.map(e => ({
+      id: e.inventoryEntryId,
       name: e.ingredient.name,
       quantity: e.amount,
       unit: e.unit,
@@ -116,10 +124,23 @@ export function* getUnits() {
   }
 }
 
+export function* deleteItem() {
+  const userId = yield select(selectUserId);
+  const itemId = yield select(selectItemIdToDelete);
+  const token = yield select(selectToken);
+  const requestURL = `${API_URL}/inventory/${encodeURIComponent(
+    userId,
+  )}/inventoryEntry/${encodeURIComponent(itemId)}`;
+  yield call(deletePrivate, requestURL, token);
+  yield put(actions.loadItems);
+}
+
 export function* itemsRepoSaga() {
-  yield takeLatest(actions.loadItems.type, getItems);
-  yield takeLatest(actions.loadItems.type, getUnits);
-  yield takeLatest(actions.loadItems.type, yield all([getItems, getUnits]));
-  yield takeEvery(actions.addItem.type, addItem);
-  yield takeLatest(actions.codeResultLoaded.type, getScannedItemInfo);
+  yield* [
+    takeLatest(actions.loadItems.type, getItems),
+    takeLatest(actions.loadItems.type, getUnits),
+    takeEvery(actions.addItem.type, addItem),
+    takeLatest(actions.codeResultLoaded.type, getScannedItemInfo),
+    takeLatest(actions.deleteItem, deleteItem),
+  ];
 }

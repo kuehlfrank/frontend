@@ -3,7 +3,11 @@ import { createSlice } from 'utils/@reduxjs/toolkit';
 import { CodeResult, ItemErrorType, ItemsPageState } from './types';
 import { Item } from 'types/Item';
 import { Unit } from 'types/Unit';
+import { useSelector } from 'react-redux';
+import { selectUserId } from '../KuehlfrankProvider/selectors';
+import { select } from 'redux-saga/effects';
 
+const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 export const initialState: ItemsPageState = {
   formItem: {
     name: '',
@@ -85,6 +89,11 @@ const itemsFormSlice = createSlice({
         state.formItem.alternative_names = [] as string[];
       }
       state.formItem.alternative_names?.push(action.payload);
+    },
+    deleteItem(state, action: PayloadAction<string>) {
+      if (state.items.findIndex(i => i.id === action.payload) !== -1) {
+        state.itemIdToDelete = action.payload;
+      }
     },
   },
 });

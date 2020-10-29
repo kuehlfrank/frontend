@@ -8,8 +8,8 @@ import { KuehlfrankState } from 'app/containers/KuehlfrankProvider/types';
   You have to declare them here manually
 */
 export interface RootState {
+  kuehlfrankState: KuehlfrankState;
   itemForm?: ItemsFormState;
   recipes?: RecipesState;
-  kuehlfrankState: KuehlfrankState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }
