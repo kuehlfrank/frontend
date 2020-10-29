@@ -14,10 +14,9 @@ import {
   selectFormItemUnit,
   selectItemImgSrc,
   selectScanResult,
-  selectToken,
   selectUnits,
-  selectUserId,
 } from './selectors';
+import { selectUserId, selectToken } from '../KuehlfrankProvider/selectors';
 import { actions } from './slice';
 import { Item } from 'types/Item';
 import { CodeResult, ItemErrorType } from './types';

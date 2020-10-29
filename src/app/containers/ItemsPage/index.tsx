@@ -61,19 +61,8 @@ export function ItemsPage() {
     useEffect(effect, []);
   };
 
-  function loadItemsWithToken() {
-    getAccessTokenSilently()
-      .then(t => {
-        dispatch(actions.setToken(t));
-        dispatch(actions.setUserId(user.sub));
-      })
-      .then(() => {
-        dispatch(actions.loadItems());
-      });
-  }
-
   useEffectOnMount(() => {
-    loadItemsWithToken();
+    dispatch(actions.loadItems());
   });
 
   const onChangeFormItemName = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,9 +92,6 @@ export function ItemsPage() {
         evt.preventDefault();
         evt.stopPropagation();
       } else {
-        getAccessTokenSilently().then(t => {
-          dispatch(actions.setToken(t));
-        });
         dispatch(actions.addItem(item));
         dispatch(actions.loadItems());
         evt.preventDefault();

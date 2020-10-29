@@ -16,8 +16,6 @@ export interface ItemsFormState {
   items: Item[];
   units: Unit[];
   error?: ItemErrorType | null;
-  token?: string | null;
-  userId?: string | null;
   scanning: boolean;
   result?: string | null;
   scanModalShow: boolean;

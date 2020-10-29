@@ -11,16 +11,6 @@ export const selectFormItem = createSelector(
   itemsFormState => itemsFormState.formItem,
 );
 
-export const selectToken = createSelector(
-  [selectDomain],
-  itemsFormState => itemsFormState.token,
-);
-
-export const selectUserId = createSelector(
-  [selectDomain],
-  itemsFormState => itemsFormState.userId,
-);
-
 export const selectItems = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.items,

@@ -1,4 +1,6 @@
 import { ItemsFormState } from 'app/containers/ItemsPage/types';
+import { RecipesState } from 'app/containers/Recipes/types';
+import { KuehlfrankState } from 'app/containers/KuehlfrankProvider/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -6,6 +8,8 @@ import { ItemsFormState } from 'app/containers/ItemsPage/types';
   You have to declare them here manually
 */
 export interface RootState {
-  itemForm: ItemsFormState;
+  itemForm?: ItemsFormState;
+  recipes?: RecipesState;
+  kuehlfrankState: KuehlfrankState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

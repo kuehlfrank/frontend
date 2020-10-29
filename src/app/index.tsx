@@ -25,6 +25,12 @@ import { ItemsPage } from './containers/ItemsPage/Loadable';
 import { Auth0ProviderWithHistory } from 'auth/Auth0ProviderWithHistory';
 import { ProtectedRoute } from 'auth/ProtectedRoute';
 import '../scss/custom.scss';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { Recipes } from './containers/Recipes';
+import { KuehlfrankProvider } from './containers/KuehlfrankProvider';
 
 export function App() {
   const history = createBrowserHistory();
@@ -41,6 +47,7 @@ export function App() {
               <Route exact path="/" component={HomePage} />
               <Route path="/home" component={HomePage} />
               <ProtectedRoute path="/items" component={ItemsPage} />
+              <ProtectedRoute path="/recipes" component={Recipes} />
               <Route component={NotFoundPage} />
             </Switch>
           </HashRouter>

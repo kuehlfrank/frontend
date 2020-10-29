@@ -17,7 +17,6 @@ export const initialState: ItemsPageState = {
   items: [],
   loading: false,
   error: null,
-  token: null,
   scanning: false,
   result: null,
   scanModalShow: false,
@@ -42,12 +41,6 @@ const itemsFormSlice = createSlice({
     },
     validateForm(state, action: PayloadAction<boolean>) {
       state.validated = action.payload;
-    },
-    setToken(state, action: PayloadAction<string>) {
-      state.token = action.payload;
-    },
-    setUserId(state, action: PayloadAction<string>) {
-      state.userId = action.payload;
     },
     loadItems(state) {
       state.loading = true;
