@@ -100,18 +100,29 @@ export function ItemsPage() {
     }
   };
 
-  function errorString() {
+  interface errorObj {
+    message?: string;
+    variant?: string;
+  }
+  const errorObj = (): errorObj => {
     if (error !== null) {
       switch (error) {
         case 1:
-          break;
+          return {
+            message: 'No items. Try adding some.',
+            variant: 'warning',
+          };
         case 99:
-          return 'Could not fetch data.';
+          return {
+            message: 'Could not fetch data.',
+            variant: 'danger',
+          };
         default:
-          return '';
+          return { message: undefined, variant: undefined };
       }
     }
-  }
+    return { message: undefined, variant: undefined };
+  };
 
   function scan() {
     dispatch(actions.setScanning(!scanning));
@@ -271,7 +282,7 @@ export function ItemsPage() {
             )}
             {error !== null && (
               <Col md="12" key="-1">
-                <Alert variant="danger">{errorString()}</Alert>
+                <Alert variant={errorObj().variant}>{errorObj().message}</Alert>
               </Col>
             )}
             {items.map((item, i) => (
