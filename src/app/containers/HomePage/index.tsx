@@ -9,6 +9,7 @@ export function HomePage() {
         <title>Home</title>
       </Helmet>
       <Jumbotron fluid>
+        <img src="%PUBLIC_URL%/mash.svg" className="mash" />
         <Container>
           <h1>Kühlfrank</h1>
           <h2>Warum wegwerfen?</h2>
