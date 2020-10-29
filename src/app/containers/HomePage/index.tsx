@@ -9,33 +9,34 @@ export function HomePage() {
         <title>Home</title>
       </Helmet>
       <Jumbotron fluid>
-        <img src="%PUBLIC_URL%/mash.svg" className="mash" />
+        <img src={process.env.PUBLIC_URL + '/mash.svg'} className="mash" />
         <Container>
           <h1>Kühlfrank</h1>
           <h2>Warum wegwerfen?</h2>
         </Container>
       </Jumbotron>
-      <Row>
-        <Col md="2"></Col>
-        <Col md="3" className="info-box">
-          <h5>Was ist Kühlfrank</h5>
-          <p>
-            Kühlfrank hilft dir, deine Vorräte in Bewegung zu halten. Es ist
-            agiles Management für deine Lebensmittel. Kühlfrank hilft deinem
-            Essen, in Bewegung zu bleiben, damit du es auch kannst.
-          </p>
-        </Col>
-        <Col md="2"></Col>
-        <Col md="3" className="info-box">
-          <h5>Was muss ich tun?</h5>
-          <p>
-            Freut uns, dass dir Kühlfrank gefällt. Um durchzustarten, klicke
-            einfach oben auf "Login" und schon kann es losgehen. Willkommen in
-            der schönen neuen Welt!
-          </p>
-        </Col>
-        <Col md="2"></Col>
-      </Row>
+      <Container fluid>
+        <Row>
+          <Col md="2"></Col>
+          <Col md="3" className="info-box">
+            <h5>Was ist Kühlfrank</h5>
+            <p>
+              Kühlfrank hilft dir, deine Vorräte in Bewegung zu halten. Es ist
+              agiles Management für deine Lebensmittel. Kühlfrank hilft deinem
+              Essen, in Bewegung zu bleiben, damit du es auch kannst.
+            </p>
+          </Col>
+          <Col md="2"></Col>
+          <Col md="3" className="info-box">
+            <h5>Was muss ich tun?</h5>
+            <p>
+              Freut uns, dass dir Kühlfrank gefällt. Um durchzustarten, klicke
+              einfach oben auf "Login" und schon kann es losgehen. Willkommen in
+              der schönen neuen Welt!
+            </p>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

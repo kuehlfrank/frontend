@@ -131,7 +131,11 @@ export function* deleteItem() {
   const requestURL = `${API_URL}/inventory/${encodeURIComponent(
     userId,
   )}/inventoryEntry/${encodeURIComponent(itemId)}`;
-  yield call(deletePrivate, requestURL, token);
+  try {
+    yield call(deletePrivate, requestURL, token);
+  } catch (err) {
+    console.error(err);
+  }
   yield put(actions.loadItems);
 }
 

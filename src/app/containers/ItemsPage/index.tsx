@@ -130,7 +130,7 @@ export function ItemsPage() {
       <Helmet>
         <title>Items</title>
       </Helmet>
-      <Container className="mt-4">
+      <Container fluid className="mt-4">
         <Container>
           <Form onSubmit={onSubmitForm} noValidate validated={validated}>
             <Form.Row>
@@ -163,8 +163,10 @@ export function ItemsPage() {
                     required
                     value={formItemUnit?.unitId ?? 0}
                   >
-                    {units.map(unit => (
-                      <option value={unit.unitId}>{unit.label}</option>
+                    {units.map((unit, i) => (
+                      <option key={i} value={unit.unitId}>
+                        {unit.label}
+                      </option>
                     ))}
                   </Form.Control>
                   <Form.Control.Feedback type="invalid">
