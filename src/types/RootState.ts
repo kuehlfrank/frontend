@@ -1,5 +1,5 @@
 import { ItemsFormState } from 'app/containers/ItemsPage/types';
-import { RecipesState } from 'app/containers/Recipes/types';
+import { RecipesState } from 'app/containers/RecipesPage/types';
 import { KuehlfrankState } from 'app/containers/KuehlfrankProvider/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
