@@ -11,13 +11,12 @@ export function HomePage() {
         <title>Home</title>
       </Helmet>
       <Jumbotron fluid>
-        <img src={process.env.PUBLIC_URL + '/mash.svg'} className="mash" />
         <Container>
           <h1>Kühlfrank</h1>
           <h2>Warum wegwerfen?</h2>
         </Container>
       </Jumbotron>
-      <Container fluid>
+      <Container className="homepage-container" fluid>
         <Row>
           <Col md="2"></Col>
           <Col md="3" className="info-box">
@@ -41,7 +40,10 @@ export function HomePage() {
       </Container>
       <footer className="mt-auto">
         <p className="love">
-          Made with <FontAwesomeIcon icon={faHeart} /> based in Börnste
+          Made with <FontAwesomeIcon icon={faHeart} /> for{' '}
+          <a target="_ref" href="https://it-talents.de">
+            IT-Talents
+          </a>
         </p>
       </footer>
     </>

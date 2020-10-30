@@ -41,8 +41,8 @@ export function App() {
           <Helmet titleTemplate="%s - Kühlfrank" defaultTitle="Kühlfrank">
             <meta name="description" content="Smartes Kühlschrankmanagement" />
           </Helmet>
-          <Route component={NavBar} />
           <HashRouter>
+            <Route component={NavBar} />
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/home" component={HomePage} />
