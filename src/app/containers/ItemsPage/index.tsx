@@ -34,6 +34,8 @@ import { sliceKey, reducer, actions } from './slice';
 import { Item } from 'types/Item';
 import { ItemElement } from './ItemElement';
 import { Unit } from 'types/Unit';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faBarcode } from '@fortawesome/free-solid-svg-icons';
 
 export function ItemsPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -185,7 +187,7 @@ export function ItemsPage() {
                   </Form.Control.Feedback>
                 </InputGroup>
               </FormGroup>
-              <FormGroup as={Col} md="3" controlId="ValidationQuantity">
+              <FormGroup as={Col} md="2" controlId="ValidationQuantity">
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text>Quantity</InputGroup.Text>
@@ -194,7 +196,7 @@ export function ItemsPage() {
                     type="number"
                     value={formItemQuantity}
                     onChange={onChangeFormItemQuantity}
-                    min="0.001"
+                    min="0"
                     step="any"
                     required
                   />
@@ -203,15 +205,18 @@ export function ItemsPage() {
                   </Form.Control.Feedback>
                 </InputGroup>
               </FormGroup>
-              <FormGroup as={Col}>
+              <FormGroup as={Col} md="auto">
                 <Button type="submit" className="float-left">
-                  Add
+                  <FontAwesomeIcon icon={faPlus} />
+                  &nbsp; Add
                 </Button>
                 <Button
                   variant="success"
                   className="float-right"
                   onClick={() => dispatch(actions.setScanning(!scanning))}
                 >
+                  <FontAwesomeIcon icon={faBarcode} />
+                  &nbsp;
                   {scanning ? 'Stop' : 'Scan'}
                 </Button>
               </FormGroup>

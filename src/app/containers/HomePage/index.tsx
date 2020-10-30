@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export function HomePage() {
   return (
@@ -37,6 +39,11 @@ export function HomePage() {
           </Col>
         </Row>
       </Container>
+      <footer className="mt-auto">
+        <p className="love">
+          Made with <FontAwesomeIcon icon={faHeart} /> based in Börnste
+        </p>
+      </footer>
     </>
   );
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Button, CardImg } from 'react-bootstrap';
 import { Item } from 'types/Item';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   item: Item;
@@ -31,7 +33,8 @@ export function ItemElement({ item, onDelete }: Props) {
             }
           }}
         >
-          Delete
+          <FontAwesomeIcon icon={faTrash} />
+          &nbsp; Delete
         </Button>
       </Card.Footer>
     </Card>
