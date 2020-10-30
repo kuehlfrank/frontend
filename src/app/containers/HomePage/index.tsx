@@ -22,28 +22,51 @@ export function HomePage() {
           <Col md="3" className="info-box">
             <h5>Was ist Kühlfrank</h5>
             <p>
-              Kühlfrank hilft dir, deine Vorräte in Bewegung zu halten. Es ist
-              agiles Management für deine Lebensmittel. Kühlfrank hilft deinem
-              Essen, in Bewegung zu bleiben, damit du es auch kannst.
+              Agiles Management jetzt auch für'n Kühlschrank? Ja richtig gehört,
+              Kühlfrank als all-in-one solution um Lebensmittelreste optimal zu
+              verkochen
             </p>
           </Col>
           <Col md="2"></Col>
           <Col md="3" className="info-box">
             <h5>Was muss ich tun?</h5>
             <p>
-              Freut uns, dass dir Kühlfrank gefällt. Um durchzustarten, klicke
-              einfach oben auf "Login" und schon kann es losgehen. Willkommen in
-              der schönen neuen Welt!
+              Um jetzt durchzustarten, registriere dich und teile Kühlfrank mit,
+              welche Lebensmittel zur Verfügung stehen. Dann bleibt nur noch
+              dich für einen der Rezeptvorschläge zu entscheiden
             </p>
           </Col>
         </Row>
       </Container>
       <footer className="mt-auto">
         <p className="love">
-          Made with <FontAwesomeIcon icon={faHeart} /> for{' '}
+          Made with{' '}
+          <FontAwesomeIcon style={{ color: '#A83F39' }} icon={faHeart} /> for{' '}
           <a target="_ref" href="https://it-talents.de">
             IT-Talents
-          </a>
+          </a>{' '}
+          by{' '}
+          <span>
+            <a target="_ref" href="https://github.com/ScholliYT">
+              @Scholli
+            </a>
+            ,{' '}
+            <a target="_ref" href="https://github.com/CapOfCave">
+              @CapOfCave
+            </a>
+            ,{' '}
+            <a target="_ref" href="https://github.com/lkIcom2000">
+              @lkIcom2000
+            </a>
+            ,{' '}
+            <a target="_ref" href="https://github.com/m0ddixx">
+              @m0ddixx
+            </a>{' '}
+            and{' '}
+            <a target="_ref" href="https://github.com/lxndio">
+              @lxndio
+            </a>
+          </span>
         </p>
       </footer>
     </>

@@ -43,11 +43,12 @@ footer {
 }
 
 .brand-header {
-    font-size: 6vmax !important;
+    font-size: 5vmax !important;
+    text-shadow: 3px 3px 4px #777
 }
 
 .brand-slogan {
-    font-size: 5vmin !important;
+    font-size: 2.5vmax !important;
     padding-left: 10vw;
 }
 
@@ -58,6 +59,7 @@ $theme-colors: ("primary": #5a8aff,
     "warning": #ed6a5a,
     "dark": #333333,
 );
+$enable-rounded: false;
 $navbar-inverse-color: #fefefe;
 $navbar-color: #fefefe;
 $navbar-default-color: #fefefe;
