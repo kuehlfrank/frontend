@@ -187,7 +187,7 @@ export function ItemsPage() {
                   </Form.Control.Feedback>
                 </InputGroup>
               </FormGroup>
-              <FormGroup as={Col} md="2" controlId="ValidationQuantity">
+              <FormGroup as={Col} md="3" controlId="ValidationQuantity">
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text>Quantity</InputGroup.Text>
@@ -205,20 +205,25 @@ export function ItemsPage() {
                   </Form.Control.Feedback>
                 </InputGroup>
               </FormGroup>
-              <FormGroup as={Col} md="auto">
-                <Button type="submit" className="float-left">
-                  <FontAwesomeIcon icon={faPlus} />
-                  &nbsp; Add
-                </Button>
-                <Button
-                  variant="success"
-                  className="float-right"
-                  onClick={() => dispatch(actions.setScanning(!scanning))}
+              <FormGroup as={Col} md="2">
+                <div
+                  className="justify-content-between"
+                  style={{ display: '-webkit-box' }}
                 >
-                  <FontAwesomeIcon icon={faBarcode} />
-                  &nbsp;
-                  {scanning ? 'Stop' : 'Scan'}
-                </Button>
+                  <Button type="submit" className="float-left">
+                    <FontAwesomeIcon icon={faPlus} />
+                    &nbsp; Add
+                  </Button>
+                  <Button
+                    variant="success"
+                    className="float-right"
+                    onClick={() => dispatch(actions.setScanning(!scanning))}
+                  >
+                    <FontAwesomeIcon icon={faBarcode} />
+                    &nbsp;
+                    {scanning ? 'Stop' : 'Scan'}
+                  </Button>
+                </div>
               </FormGroup>
             </Form.Row>
           </Form>

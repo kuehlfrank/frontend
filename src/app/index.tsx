@@ -38,7 +38,10 @@ export function App() {
     <>
       <Router history={history}>
         <Auth0ProviderWithHistory>
-          <Helmet titleTemplate="%s - Kühlfrank" defaultTitle="Kühlfrank">
+          <Helmet
+            titleTemplate="%s - Kühlfrank, Warum wegwerfen?"
+            defaultTitle="Kühlfrank, Warum wegwerfen?"
+          >
             <meta name="description" content="Smartes Kühlschrankmanagement" />
           </Helmet>
           <HashRouter>
