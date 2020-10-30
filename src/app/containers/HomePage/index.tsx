@@ -12,8 +12,8 @@ export function HomePage() {
       </Helmet>
       <Jumbotron fluid>
         <Container>
-          <h1>Kühlfrank</h1>
-          <h2>Warum wegwerfen?</h2>
+          <h1 className="brand-header">Kühlfrank</h1>
+          <h2 className="brand-slogan">Warum wegwerfen?</h2>
         </Container>
       </Jumbotron>
       <Container className="homepage-container" fluid>

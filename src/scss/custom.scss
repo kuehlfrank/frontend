@@ -19,24 +19,6 @@ body {
     font-family: 'Montserrat', sans-serif !important;
 }
 
-h1 {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 500;
-    font-size: 12vh;
-}
-
-h2 {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 5vh;
-    padding-left: 10vw;
-}
-
-h5 {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 500;
-    font-size: 4vh;
-}
-
 footer {
     position: relative;
     bottom: 0;
@@ -44,8 +26,6 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-
-    p {}
 }
 
 
@@ -61,6 +41,16 @@ footer {
     background-clip: border-box;
     background-size: contain;
 }
+
+.brand-header {
+    font-size: 6vmax !important;
+}
+
+.brand-slogan {
+    font-size: 5vmin !important;
+    padding-left: 10vw;
+}
+
 
 $body-bg: #fafafa;
 $theme-colors: ("primary": #5a8aff,
