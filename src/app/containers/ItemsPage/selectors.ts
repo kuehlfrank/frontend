@@ -80,3 +80,13 @@ export const selectItemIdToDelete = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.itemIdToDelete,
 );
+
+export const isShowEditModal = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.showEditModal,
+);
+
+export const selectUpdatedItem = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.updatedItem,
+);

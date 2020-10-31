@@ -15,7 +15,8 @@ import {
   selectScanning,
   selectUnits,
   selectScanModalShow,
-  selectFormItem,
+  isShowEditModal,
+  selectUpdatedItem,
 } from './selectors';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -37,6 +38,85 @@ import { Unit } from 'types/Unit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faBarcode } from '@fortawesome/free-solid-svg-icons';
 
+export function EditModal(props) {
+  const dispatch = useDispatch();
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({
+    key: sliceKey,
+    saga: itemsRepoSaga,
+  });
+  const item = props.item as Item;
+  const units = useSelector(selectUnits);
+  return (
+    <>
+      <Modal {...props}>
+        <Modal.Header>{item?.name} bearbeiten</Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Menge</InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="number"
+                  value={item?.amount}
+                  onChange={e =>
+                    dispatch(actions.updateItemAmount(parseInt(e.target.value)))
+                  }
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text className="input-group-text">
+                    Einheit
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  as="select"
+                  onChange={e => {
+                    let unit = units.find(u => u.unitId === e.target.value);
+                    if (unit) {
+                      dispatch(actions.updateItemUnit(unit));
+                    }
+                  }}
+                  required
+                  value={item?.unit?.unitId ?? 0}
+                >
+                  {units.map((unit, i) => (
+                    <option key={i} value={unit.unitId}>
+                      {unit.label}
+                    </option>
+                  ))}
+                </Form.Control>
+                <Form.Control.Feedback type="invalid">
+                  Bitte geben Sie eine Einheit an.
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="danger"
+            onClick={() => dispatch(actions.hideEditModal())}
+          >
+            Abbrechen
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => dispatch(actions.updateItem())}
+          >
+            Speichern
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
 export function ItemsPage() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({
@@ -54,6 +134,8 @@ export function ItemsPage() {
   const scanning = useSelector(selectScanning);
   const units = useSelector(selectUnits);
   const scanModalShow = useSelector(selectScanModalShow);
+  const editItem = useSelector(selectUpdatedItem);
+  const showEditModal = useSelector(isShowEditModal);
   const scannerRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -145,7 +227,7 @@ export function ItemsPage() {
         <Container>
           <Form onSubmit={onSubmitForm} noValidate validated={validated}>
             <Form.Row>
-              <FormGroup as={Col} md="4" controlId="validationName">
+              <Form.Group as={Col} md="4" controlId="validationName">
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text>Name</InputGroup.Text>
@@ -160,8 +242,8 @@ export function ItemsPage() {
                     Please give a name.
                   </Form.Control.Feedback>
                 </InputGroup>
-              </FormGroup>
-              <FormGroup as={Col} md="3" controlId="validationUnit">
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationUnit">
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text className="input-group-text">
@@ -184,8 +266,8 @@ export function ItemsPage() {
                     Bitte geben Sie eine Einheit an.
                   </Form.Control.Feedback>
                 </InputGroup>
-              </FormGroup>
-              <FormGroup as={Col} md="3" controlId="ValidationAmount">
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="ValidationAmount">
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text>Menge</InputGroup.Text>
@@ -202,8 +284,8 @@ export function ItemsPage() {
                     Bitte geben Sie eine Menge größer 0 an.
                   </Form.Control.Feedback>
                 </InputGroup>
-              </FormGroup>
-              <FormGroup as={Col} md="2">
+              </Form.Group>
+              <Form.Group as={Col} md="2">
                 <div className="justify-content-between">
                   <Button type="submit" className="float-left">
                     <FontAwesomeIcon icon={faPlus} />
@@ -219,7 +301,7 @@ export function ItemsPage() {
                     {scanning ? 'Stop' : 'Scan'}
                   </Button>
                 </div>
-              </FormGroup>
+              </Form.Group>
             </Form.Row>
           </Form>
         </Container>
@@ -296,9 +378,11 @@ export function ItemsPage() {
                   item={item}
                   key={i}
                   onDelete={(id, e) => onDeleteItem(id, e)}
+                  onEdit={(item, e) => dispatch(actions.showEditModal(item))}
                 />
               </Col>
             ))}
+            <EditModal show={showEditModal} item={editItem}></EditModal>
           </Row>
         </Container>
       </Container>

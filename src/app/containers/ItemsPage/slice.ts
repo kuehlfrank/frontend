@@ -24,6 +24,7 @@ export const initialState: ItemsPageState = {
   scanning: false,
   result: null,
   scanModalShow: false,
+  showEditModal: false,
 };
 
 const itemsFormSlice = createSlice({
@@ -96,6 +97,24 @@ const itemsFormSlice = createSlice({
         state.itemIdToDelete = action.payload;
       }
     },
+    showEditModal(state, action: PayloadAction<Item>) {
+      state.showEditModal = true;
+      state.updatedItem = action.payload;
+    },
+    hideEditModal(state) {
+      state.showEditModal = false;
+    },
+    updateItemAmount(state, action: PayloadAction<number>) {
+      if (state.updatedItem) {
+        state.updatedItem.amount = action.payload;
+      }
+    },
+    updateItemUnit(state, action: PayloadAction<Unit>) {
+      if (state.updatedItem) {
+        state.updatedItem.unit = action.payload;
+      }
+    },
+    updateItem(state) {},
   },
 });
 

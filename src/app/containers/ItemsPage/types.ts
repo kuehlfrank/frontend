@@ -20,6 +20,8 @@ export interface ItemsFormState {
   result?: string | null;
   scanModalShow: boolean;
   itemIdToDelete?: string;
+  updatedItem?: Item | null | undefined;
+  showEditModal: boolean;
 }
 
 export enum ItemErrorType {

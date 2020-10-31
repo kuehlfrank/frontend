@@ -10,6 +10,7 @@ import {
 import {
   deletePrivate,
   postPrivate,
+  putPrivate,
   request,
   requestPrivate,
 } from 'utils/request';
@@ -22,6 +23,7 @@ import {
   selectItemImgSrc,
   selectScanResult,
   selectUnits,
+  selectUpdatedItem,
 } from './selectors';
 import { selectUserId, selectToken } from '../KuehlfrankProvider/selectors';
 import { actions } from './slice';
@@ -143,12 +145,27 @@ export function* deleteItem() {
   yield put(actions.loadItems());
 }
 
+export function* updateItem() {
+  yield call(waitFor, state => selectToken(state) != null);
+  const item: Item = yield select(selectUpdatedItem);
+  const token = yield select(selectToken);
+  if (item == null) return;
+  if (item.amount === undefined && item.unit === undefined) return;
+  const requestURL = `${API_URL}/inventory/inventoryEntry/${item.id}`;
+  try {
+    yield call(putPrivate, requestURL, token, item);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export function* itemsRepoSaga() {
   yield* [
     takeLatest(actions.loadItems.type, getItems),
     takeLatest(actions.loadItems.type, getUnits),
     takeEvery(actions.addItem.type, addItem),
     takeLatest(actions.codeResultLoaded.type, getScannedItemInfo),
-    takeLatest(actions.deleteItem, deleteItem),
+    takeLatest(actions.deleteItem.type, deleteItem),
+    takeLatest(actions.updateItem.type, updateItem),
   ];
 }

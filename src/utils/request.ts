@@ -90,6 +90,27 @@ export async function postPrivate(
   return parseJSON(response);
 }
 
+export async function putPrivate(
+  url: string,
+  token: string,
+  data: any,
+  options?: RequestInit,
+): Promise<{} | { err: ResponseError }> {
+  if (options === undefined) {
+    options = {};
+  }
+  options.method = 'PUT';
+  options.headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  };
+  options.body = JSON.stringify(data);
+  const fetchResponse = await fetch(url, options);
+  const response = checkStatus(fetchResponse);
+  return parseJSON(response);
+}
+
 export async function deletePrivate(
   url: string,
   token: string,
