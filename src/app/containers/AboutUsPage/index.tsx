@@ -43,7 +43,7 @@ export function AboutUsPage() {
             <Col md="9" className="info-box">
               <h5 className="info-header">Lars</h5>
               <p className="info-text">
-                Moin, ich bin Lars. Zurzeit bin ich während eines dualen
+                Moin, ich bin Lars. Zurzeit bin ich im Rahmen eines dualen
                 Studiums bei der Fiducia & GAD IT AG als Softwareentwickler
                 tätig. Ich interessiere mich für Schach, Sport und
                 Programmierung von Algorithmen.
@@ -59,7 +59,7 @@ export function AboutUsPage() {
               <h5 className="info-header">Alexander</h5>
               <p className="info-text">
                 Hi, ich bin Alexander. Ich studiere Informatik an der TU
-                Dortmund. Neben der Programmierung von Algorithmen, beschäftige
+                Dortmund. Neben der Programmierung von Algorithmen beschäftige
                 ich mich mit Grafik- und Webdesign und spiele Tischtennis.
               </p>
             </Col>
@@ -73,7 +73,7 @@ export function AboutUsPage() {
               <h5 className="info-header">Nico</h5>
               <p className="info-text">
                 Moin, ich bin Nico. Neben meinem DJ-Gewerbe arbeite ich als
-                Softwareentwickler bei der Stadt-Essen.
+                Softwareentwickler bei der Stadt Essen.
               </p>
             </Col>
             <Col md="1">&nbsp;</Col>
