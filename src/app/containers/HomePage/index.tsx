@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export function HomePage() {
   return (
@@ -67,6 +68,8 @@ export function HomePage() {
             <a target="_ref" href="https://github.com/lxndio">
               @lxndio
             </a>
+            &nbsp;&nbsp;&ndash;&nbsp;&nbsp;
+            <Link to="/legal">Rechtliches</Link>
           </span>
         </p>
       </footer>

@@ -32,6 +32,7 @@ import { useEffect } from 'react';
 import { Recipes } from './containers/RecipesPage/Loadable';
 import { KuehlfrankProvider } from './containers/KuehlfrankProvider';
 import { AboutUsPage } from './containers/AboutUsPage/Loadable';
+import { LegalPage } from './containers/LegalPage/Loadable';
 
 export function App() {
   const history = createBrowserHistory();
@@ -53,6 +54,7 @@ export function App() {
               <ProtectedRoute path="/items" component={ItemsPage} />
               <ProtectedRoute path="/recipes" component={Recipes} />
               <Route path="/aboutus" component={AboutUsPage} />
+              <Route path="/legal" component={LegalPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </HashRouter>

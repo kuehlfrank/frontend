@@ -113,4 +113,12 @@ $navbar-margin-bottom: 15px;
     margin-right: .5em;
 }
 
+.love a {
+    color: #38B0FF;
+}
+
+.love a:hover {
+    color: #C50BFF;
+}
+
 @import "~bootstrap/scss/bootstrap.scss";
