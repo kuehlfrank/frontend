@@ -92,10 +92,15 @@ export function* getScannedItemInfo() {
     if (response.product.product_name_de !== '')
       yield put(actions.changeItemName(response.product.product_name_de));
     else yield put(actions.changeItemName(response.product.product_name));
-
-    let amount: string = response.product.amount;
-    let unitLabel = amount.match('\\D.*')![0];
-    let amountNum = amount.match('.*\\d')![0];
+    let name = yield select(selectFormItemName);
+    yield put(actions.addIngredientName(name));
+    let amount: string = response.product.quantity;
+    let matches = amount.match('^(\\d+(?:[.,]\\d+)?) *([\\wäöüÄÖÜß]*)$');
+    // let unitLabel = amount.match('\\D.*')![0];
+    // let amountNum = amount.match('.*\\d')![0];
+    console.log(matches);
+    let amountNum = matches![1];
+    let unitLabel = matches![2];
     yield put(actions.changeItemAmount(parseInt(amountNum)));
     const units = yield select(selectUnits);
     yield put(
@@ -160,6 +165,22 @@ export function* updateItem() {
   }
 }
 
+export function* loadTypeAhead() {
+  yield call(waitFor, state => selectToken(state) != null);
+  const token = yield select(selectToken);
+  const query = yield select(selectFormItemName);
+  const requestURL = `${API_URL}/ingredients/find?q=${encodeURIComponent(
+    query,
+  )}&limit=10`;
+
+  try {
+    const response = yield call(requestPrivate, requestURL, token);
+    yield put(actions.typeaheadLoaded(response));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export function* itemsRepoSaga() {
   yield* [
     takeLatest(actions.loadItems.type, getItems),
@@ -168,5 +189,6 @@ export function* itemsRepoSaga() {
     takeLatest(actions.codeResultLoaded.type, getScannedItemInfo),
     takeLatest(actions.deleteItem.type, deleteItem),
     takeLatest(actions.updateItem.type, updateItem),
+    takeEvery(actions.changeItemName, loadTypeAhead),
   ];
 }

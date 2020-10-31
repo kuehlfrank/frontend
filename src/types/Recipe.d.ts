@@ -8,6 +8,7 @@ export interface Recipe {
   imgSrc: string;
   externalLink: string;
   missingIngredientsCount: number;
+  totalIngredientsCount: number;
 }
 export interface RecipeIngredient {
   amount: number;
@@ -22,4 +23,5 @@ export interface RecipeOverview {
   imgSrc: string;
   missingIngredientsCount: number;
   externalSource: string;
+  externalUrl?: string;
 }

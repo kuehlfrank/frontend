@@ -25,6 +25,7 @@ export const initialState: ItemsPageState = {
   result: null,
   scanModalShow: false,
   showEditModal: false,
+  ingredientNames: [],
 };
 
 const itemsFormSlice = createSlice({
@@ -115,6 +116,12 @@ const itemsFormSlice = createSlice({
       }
     },
     updateItem(state) {},
+    typeaheadLoaded(state, action: PayloadAction<string[]>) {
+      state.ingredientNames = action.payload;
+    },
+    addIngredientName(state, action: PayloadAction<string>) {
+      state.ingredientNames?.push(action.payload);
+    },
   },
 });
 

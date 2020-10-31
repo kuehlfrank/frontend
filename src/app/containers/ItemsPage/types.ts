@@ -22,6 +22,7 @@ export interface ItemsFormState {
   itemIdToDelete?: string;
   updatedItem?: Item | null | undefined;
   showEditModal: boolean;
+  ingredientNames: string[];
 }
 
 export enum ItemErrorType {

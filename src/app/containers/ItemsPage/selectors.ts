@@ -90,3 +90,8 @@ export const selectUpdatedItem = createSelector(
   [selectDomain],
   itemsFormState => itemsFormState.updatedItem,
 );
+
+export const selectIngredientNames = createSelector(
+  [selectDomain],
+  itemsFormState => itemsFormState.ingredientNames,
+);

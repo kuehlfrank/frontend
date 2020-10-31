@@ -17,6 +17,7 @@ import {
   selectScanModalShow,
   isShowEditModal,
   selectUpdatedItem,
+  selectIngredientNames,
 } from './selectors';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -37,6 +38,7 @@ import { ItemElement } from './ItemElement';
 import { Unit } from 'types/Unit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faBarcode } from '@fortawesome/free-solid-svg-icons';
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 export function EditModal(props) {
   const dispatch = useDispatch();
@@ -136,7 +138,9 @@ export function ItemsPage() {
   const scanModalShow = useSelector(selectScanModalShow);
   const editItem = useSelector(selectUpdatedItem);
   const showEditModal = useSelector(isShowEditModal);
+  const ingredientNames = useSelector(selectIngredientNames);
   const scannerRef = useRef(null);
+  const typeaheadRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -148,8 +152,8 @@ export function ItemsPage() {
     dispatch(actions.loadItems());
   });
 
-  const onChangeFormItemName = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(actions.changeItemName(evt.currentTarget.value));
+  const onChangeFormItemName = (name: string, evt) => {
+    dispatch(actions.changeItemName(name));
   };
 
   const onChangeFormItemUnit = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -169,7 +173,7 @@ export function ItemsPage() {
       amount: formItemAmount,
     };
     if (evt !== undefined && evt.preventDefault) {
-      if (form.checkValidity() === false) {
+      if (form.checkValidity() === false || formItemName === '') {
         evt.preventDefault();
         evt.stopPropagation();
       } else {
@@ -232,12 +236,38 @@ export function ItemsPage() {
                   <InputGroup.Prepend>
                     <InputGroup.Text>Name</InputGroup.Text>
                   </InputGroup.Prepend>
-                  <Form.Control
-                    type="text"
-                    value={formItemName}
-                    onChange={onChangeFormItemName}
-                    required
+                  <Typeahead
+                    id="itemName"
+                    options={ingredientNames}
+                    onInputChange={onChangeFormItemName}
+                    onChange={selected =>
+                      onChangeFormItemName(selected[0], undefined)
+                    }
+                    renderInput={({
+                      inputRef,
+                      referenceElementRef,
+                      ...inputProps
+                    }) => (
+                      <Form.Control
+                        {...inputProps}
+                        type="text"
+                        value={formItemName}
+                        ref={input => {
+                          // Be sure to correctly handle these refs. In many cases, both can simply receive
+                          // the underlying input node, but `referenceElementRef can receive a wrapper node if
+                          // your custom input is more complex (See TypeaheadInputMulti for an example).
+                          inputRef(input);
+                          referenceElementRef(input);
+                        }}
+                      />
+                    )}
                   />
+                  {/* <Typeahead
+                    selected={formItemName}
+                    allowNew={true}
+                    isValid={formItemName !== ''}
+                    ref={typeaheadRef}
+                  /> */}
                   <Form.Control.Feedback type="invalid">
                     Please give a name.
                   </Form.Control.Feedback>
@@ -286,7 +316,7 @@ export function ItemsPage() {
                 </InputGroup>
               </Form.Group>
               <Form.Group as={Col} md="2">
-                <div className="justify-content-between">
+                <div className="row justify-content-between">
                   <Button type="submit" className="float-left">
                     <FontAwesomeIcon icon={faPlus} />
                     &nbsp; Add

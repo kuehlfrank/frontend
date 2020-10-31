@@ -6,6 +6,7 @@ import {
   Modal,
   Form,
   InputGroup,
+  Row,
 } from 'react-bootstrap';
 import { Item } from 'types/Item';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -44,30 +45,31 @@ export function ItemElement({ item, onDelete, onEdit }: Props) {
             {item.amount} {item.unit?.label}
           </p>
         </Card.Body>
-        <Card.Footer className="justify-content-between">
-          <Button
-            size="sm"
-            variant="primary"
-            className="float-left"
-            onClick={e => onEdit && onEdit(item, e)}
-          >
-            <FontAwesomeIcon icon={faBalanceScale} />
-            &nbsp; Bearbeiten
-          </Button>
-          <Button
-            size="sm"
-            variant="danger"
-            className="float-right"
-            onClick={e => {
-              if (onDelete) {
-                console.debug(item);
-                onDelete(item.id, e);
-              }
-            }}
-          >
-            <FontAwesomeIcon icon={faTrash} />
-            &nbsp; Löschen
-          </Button>
+        <Card.Footer>
+          <Row className="justify-content-between">
+            <Button
+              size="sm"
+              variant="primary"
+              className="float-left"
+              onClick={e => onEdit && onEdit(item, e)}
+            >
+              <FontAwesomeIcon icon={faBalanceScale} />
+              &nbsp; Bearbeiten
+            </Button>
+            <Button
+              size="sm"
+              variant="danger"
+              className="float-right"
+              onClick={e => {
+                if (onDelete) {
+                  console.debug(item);
+                  onDelete(item.id, e);
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+          </Row>
         </Card.Footer>
       </Card>
     </>
