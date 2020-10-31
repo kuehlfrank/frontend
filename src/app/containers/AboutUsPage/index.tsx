@@ -38,7 +38,7 @@ export function AboutUsPage() {
           </Row>
           <Row>
             <Col md="1" className="about-image-box">
-              <img className="about-image" src="/linus.jpg" />
+              <img className="about-image" src="/lars.jpg" />
             </Col>
             <Col md="9" className="info-box">
               <h5 className="info-header">Lars</h5>
