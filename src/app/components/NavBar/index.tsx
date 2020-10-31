@@ -40,6 +40,9 @@ export function NavBar() {
                 </LinkContainer>
               </>
             )}
+            <LinkContainer to="/aboutus">
+              <Nav.Link>About us</Nav.Link>
+            </LinkContainer>
           </Nav>
           <UserBadge />
           <AuthenticationButton />

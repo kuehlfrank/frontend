@@ -31,6 +31,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Recipes } from './containers/RecipesPage/Loadable';
 import { KuehlfrankProvider } from './containers/KuehlfrankProvider';
+import { AboutUsPage } from './containers/AboutUsPage/Loadable';
 
 export function App() {
   const history = createBrowserHistory();
@@ -51,6 +52,7 @@ export function App() {
               <Route path="/home" component={HomePage} />
               <ProtectedRoute path="/items" component={ItemsPage} />
               <ProtectedRoute path="/recipes" component={Recipes} />
+              <Route path="/aboutus" component={AboutUsPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </HashRouter>
