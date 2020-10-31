@@ -7,6 +7,9 @@ export interface RecipesState {
   loadingSuggestions: boolean;
   loadingRandom: boolean;
   recipeError?: RecipeError | null | undefined;
+  currentRecipeId?: string;
+  showDetailModal: boolean;
+  detailRecipe?: Recipe;
 }
 
 export enum RecipeError {

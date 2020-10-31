@@ -74,6 +74,7 @@ const itemsFormSlice = createSlice({
     },
     unitsLoaded(state, action: PayloadAction<Unit[]>) {
       state.units = action.payload;
+      state.formItem.unit = action.payload[0];
     },
     changeItemImgSrc(state, action: PayloadAction<string>) {
       state.formItem.imgSrc = action.payload;

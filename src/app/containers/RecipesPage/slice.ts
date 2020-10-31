@@ -7,6 +7,7 @@ import { ContainerState, RecipeError } from './types';
 export const initialState: ContainerState = {
   loadingRandom: true,
   loadingSuggestions: true,
+  showDetailModal: false,
 };
 
 const recipesSlice = createSlice({
@@ -24,12 +25,24 @@ const recipesSlice = createSlice({
       state.loadingSuggestions = false;
     },
     randomRecipeLoaded(state, action: PayloadAction<RecipeOverview>) {
-      console.debug(action.payload);
       state.randomRecipe = action.payload;
       state.loadingRandom = false;
     },
     recipeError(state, action: PayloadAction<RecipeError>) {
       state.recipeError = action.payload;
+    },
+    loadDetails(state, action: PayloadAction<string>) {
+      state.currentRecipeId = action.payload;
+    },
+    detailsLoaded(state, action: PayloadAction<Recipe>) {
+      state.detailRecipe = action.payload;
+    },
+    showDetails(state) {
+      state.showDetailModal = true;
+    },
+    hideDetails(state) {
+      state.showDetailModal = false;
+      state.currentRecipeId = undefined;
     },
   },
 });

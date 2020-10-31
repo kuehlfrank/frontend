@@ -5,6 +5,7 @@ import { selectUserId, selectToken } from '../KuehlfrankProvider/selectors';
 import { Recipe, RecipeOverview } from 'types/Recipe';
 import { RecipeError } from './types';
 import { waitFor } from 'utils/wait-for';
+import { selectCurrentRecipeId } from './selectors';
 
 const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 
@@ -54,9 +55,27 @@ export function* loadSuggestedRecipes() {
   }
 }
 
+export function* loadDetails() {
+  const currentRecipeId = yield select(selectCurrentRecipeId);
+  const requestURL = `${API_URL}/recipes/suggestions/suggestion/${currentRecipeId}`;
+  yield call(waitFor, state => selectToken(state) != null);
+  const token = yield select(selectToken);
+
+  try {
+    const recipeDetails: Recipe = yield call(requestPrivate, requestURL, token);
+    if (recipeDetails !== undefined && recipeDetails !== null) {
+      yield put(actions.detailsLoaded(recipeDetails));
+      yield put(actions.showDetails());
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export function* recipesSaga() {
   yield* [
     takeLatest(actions.loadRandom.type, loadRandomRecipe),
     takeLatest(actions.loadSuggestions.type, loadSuggestedRecipes),
+    takeLatest(actions.loadDetails.type, loadDetails),
   ];
 }

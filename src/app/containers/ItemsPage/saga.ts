@@ -29,9 +29,14 @@ import { Item } from 'types/Item';
 import { CodeResult, ItemErrorType } from './types';
 import { Inventory } from 'types/Inventory';
 import { Unit } from 'types/Unit';
+import { waitFor } from 'utils/wait-for';
 const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 
 export function* getItems() {
+  yield call(
+    waitFor,
+    state => selectToken(state) != null && selectUserId(state) != null,
+  );
   const token: string = yield select(selectToken);
   const userId: string = yield select(selectUserId);
   const requestURL = `${API_URL}/inventory/${encodeURIComponent(userId)}`;
@@ -55,6 +60,10 @@ export function* getItems() {
 }
 
 export function* addItem() {
+  yield call(
+    waitFor,
+    state => selectToken(state) != null && selectUserId(state) != null,
+  );
   const token: string = yield select(selectToken);
   const userId: string = yield select(selectUserId);
   const requestURL = `${API_URL}/inventory/${encodeURIComponent(
@@ -113,6 +122,7 @@ export function* getScannedItemInfo() {
 }
 
 export function* getUnits() {
+  yield call(waitFor, state => selectToken(state) != null);
   const requestURL = `${API_URL}/units`;
 
   const token = yield select(selectToken);
@@ -125,6 +135,10 @@ export function* getUnits() {
 }
 
 export function* deleteItem() {
+  yield call(
+    waitFor,
+    state => selectToken(state) != null && selectUserId(state) != null,
+  );
   const userId = yield select(selectUserId);
   const itemId = yield select(selectItemIdToDelete);
   const token = yield select(selectToken);
@@ -136,7 +150,7 @@ export function* deleteItem() {
   } catch (err) {
     console.error(err);
   }
-  yield put(actions.loadItems);
+  yield put(actions.loadItems());
 }
 
 export function* itemsRepoSaga() {

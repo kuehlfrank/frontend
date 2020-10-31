@@ -206,10 +206,7 @@ export function ItemsPage() {
                 </InputGroup>
               </FormGroup>
               <FormGroup as={Col} md="2">
-                <div
-                  className="justify-content-between"
-                  style={{ display: '-webkit-box' }}
-                >
+                <div className="justify-content-between">
                   <Button type="submit" className="float-left">
                     <FontAwesomeIcon icon={faPlus} />
                     &nbsp; Add

@@ -3,19 +3,23 @@ import { Unit } from './Unit';
 
 export interface Recipe {
   recipeId: string;
-  name: string;
+  title: string;
   recipeIngredients: RecipeIngredient[];
+  imgSrc: string;
+  externalLink: string;
+  missingIngredientsCount: number;
+}
+export interface RecipeIngredient {
+  amount: number;
+  ingredient: Ingredient;
+  missing: boolean;
+  unit: Unit;
 }
 
 export interface RecipeOverview {
   recipeId: string;
   title: string;
   imgSrc: string;
-  missingIngredientCount: number;
-}
-
-export interface RecipeIngredient {
-  ingredient: Ingredient;
-  amount: number;
-  unit: Unit;
+  missingIngredientsCount: number;
+  externalSource: string;
 }

@@ -22,3 +22,18 @@ export const IsLoadingSuggestedRecipes = createSelector(
   [selectDomain],
   recipesState => recipesState.loadingSuggestions,
 );
+
+export const selectCurrentRecipeId = createSelector(
+  [selectDomain],
+  recipesState => recipesState.currentRecipeId,
+);
+
+export const selectShowDetailModal = createSelector(
+  [selectDomain],
+  recipesState => recipesState.showDetailModal,
+);
+
+export const detailRecipe = createSelector(
+  [selectDomain],
+  recipesState => recipesState.detailRecipe,
+);
