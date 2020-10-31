@@ -29,9 +29,10 @@ export function AboutUsPage() {
             <Col md="9" className="info-box">
               <h5 className="info-header">Linus</h5>
               <p className="info-text">
-                Hey, ich bin Linus. Neben meinem dualen Studium bei der Fiducia
-                & GAD IT AG vertreibe ich mir die Zeit mit Mountainbiking und
-                Projekten mit Freunden.
+                Hey, ich bin Linus. Während meines dualen Studiums bei der 
+                Fiducia & GAD IT AG bin ich als Softwareentwickler tätig.
+                In meiner Freizeit fahre ich Mountainbike und führe verschiedene 
+                Projekte mit Freunden durch.                
               </p>
             </Col>
             <Col md="1">&nbsp;</Col>
