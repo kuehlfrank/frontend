@@ -7,6 +7,13 @@ export interface Recipe {
   recipeIngredients: RecipeIngredient[];
 }
 
+export interface RecipeOverview {
+  recipeId: string;
+  title: string;
+  imgSrc: string;
+  missingIngredientCount: number;
+}
+
 export interface RecipeIngredient {
   ingredient: Ingredient;
   amount: number;

@@ -1,16 +1,17 @@
-import { Recipe } from 'types/Recipe';
+import { Recipe, RecipeOverview } from 'types/Recipe';
 
 /* --- STATE --- */
 export interface RecipesState {
-  randomRecipe?: Recipe | null | undefined;
-  suggestedRecipes?: Recipe[] | null | undefined;
+  randomRecipe?: RecipeOverview | null | undefined;
+  suggestedRecipes?: RecipeOverview[] | null | undefined;
   loadingSuggestions: boolean;
   loadingRandom: boolean;
   recipeError?: RecipeError | null | undefined;
 }
 
 export enum RecipeError {
-  COULD_NOT_LOAD_RECIPE = 'Could not load Recipe',
+  COULD_NOT_LOAD_RANDOM_RECIPE = 'Could not load random Recipe',
+  COULD_NOT_LOAD_SUGGESTED_RECIPES = 'Could not load suggested Recipes',
 }
 
 export type ContainerState = RecipesState;

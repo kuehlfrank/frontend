@@ -11,12 +11,12 @@ import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { actions, reducer, sliceKey } from './slice';
-import { selectRandomRecipe } from './selectors';
+import { selectRandomRecipe, selectSuggestedRecipes } from './selectors';
 import { recipesSaga } from './saga';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { RecipeItem } from './RecipeItem';
 import { select } from 'redux-saga/effects';
-import { Recipe } from 'types/Recipe';
+import { RecipeOverview } from 'types/Recipe';
 
 interface Props {}
 
@@ -33,10 +33,12 @@ export function Recipes(props: Props) {
   };
 
   const randomRecipe = useSelector(selectRandomRecipe);
+  const suggestedRecipes = useSelector(selectSuggestedRecipes);
   console.log(randomRecipe);
 
   useEffectOnMount(() => {
     dispatch(actions.loadRandom());
+    dispatch(actions.loadSuggestions());
   });
 
   return (
@@ -46,16 +48,35 @@ export function Recipes(props: Props) {
           <title>Recipes</title>
           <meta name="description" content="Description of Recipes" />
         </Helmet>
-        {randomRecipe && (
+        <Row>
           <Container>
-            <h5>Zufälliges Rezept</h5>
-            <Row>
-              <Col md="4">
-                <RecipeItem recipe={randomRecipe as Recipe} />
-              </Col>
-            </Row>
+            {randomRecipe && (
+              <Container>
+                <h5>Zufälliges Rezept</h5>
+                <Row>
+                  <Col md="4">
+                    <RecipeItem recipe={randomRecipe} />
+                  </Col>
+                </Row>
+              </Container>
+            )}
           </Container>
-        )}
+        </Row>
+        <Row>
+          <Container>
+            {suggestedRecipes && (
+              <Container>
+                <Row>
+                  {suggestedRecipes.map(recipe => (
+                    <Col md="4">
+                      <RecipeItem recipe={recipe} />
+                    </Col>
+                  ))}
+                </Row>
+              </Container>
+            )}
+          </Container>
+        </Row>
       </Container>
     </>
   );

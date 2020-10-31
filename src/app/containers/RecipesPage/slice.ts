@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { Recipe } from 'types/Recipe';
+import { Recipe, RecipeOverview } from 'types/Recipe';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState, RecipeError } from './types';
 
@@ -19,11 +19,11 @@ const recipesSlice = createSlice({
     loadRandom(state) {
       state.loadingRandom = true;
     },
-    suggestedRecipesLoaded(state, action: PayloadAction<Recipe[]>) {
+    suggestedRecipesLoaded(state, action: PayloadAction<RecipeOverview[]>) {
       state.suggestedRecipes = action.payload;
       state.loadingSuggestions = false;
     },
-    randomRecipeLoaded(state, action: PayloadAction<Recipe>) {
+    randomRecipeLoaded(state, action: PayloadAction<RecipeOverview>) {
       console.debug(action.payload);
       state.randomRecipe = action.payload;
       state.loadingRandom = false;
