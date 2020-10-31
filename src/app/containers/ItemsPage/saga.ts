@@ -89,6 +89,7 @@ export function* getScannedItemInfo() {
 
   try {
     const response = yield call(request, requestURL);
+    if (response.product === undefined) return;
     if (response.product.product_name_de !== '')
       yield put(actions.changeItemName(response.product.product_name_de));
     else yield put(actions.changeItemName(response.product.product_name));
@@ -99,8 +100,11 @@ export function* getScannedItemInfo() {
     // let unitLabel = amount.match('\\D.*')![0];
     // let amountNum = amount.match('.*\\d')![0];
     console.log(matches);
-    let amountNum = matches![1];
+    var amountNum = matches![1];
     let unitLabel = matches![2];
+    if (amountNum.includes('.')) {
+      amountNum = amountNum.replace('.', ',');
+    }
     yield put(actions.changeItemAmount(parseInt(amountNum)));
     const units = yield select(selectUnits);
     yield put(
