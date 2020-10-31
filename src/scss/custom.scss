@@ -44,24 +44,24 @@ footer {
 
 .brand-header {
     font-size: 5vmax !important;
-    text-shadow: 3px 3px 4px #777
+    font-weight: 500;
 }
 
 .brand-slogan {
     font-size: 2.5vmax !important;
     padding-left: 10vw;
+    font-weight: 400;
 }
 
 .info-header {
-    font-weight: bold;
     margin-bottom: 5px;
     letter-spacing: .05em;
     font-size: 28px;
     line-height: 3rem;
+    font-weight: 500;
 }
 
 .info-text {
-    text-align: justify;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased !important;
     -moz-font-smoothing: antialiased !important;
@@ -90,8 +90,8 @@ $navbar-margin-bottom: 15px;
 
 .info-box {
     padding: 1rem;
-    background-color: #e6ebe0;
-    border-radius: 10px;
+    background-color: #F7F7F7;
+    border: 1px solid #DFDFDF;
     margin: 2rem;
 }
 

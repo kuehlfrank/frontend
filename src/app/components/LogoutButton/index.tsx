@@ -17,7 +17,7 @@ export function LogoutButton() {
           })
         }
       >
-        Log out &nbsp;
+        Abmelden &nbsp;
         <FontAwesomeIcon icon={faSignOutAlt} />
       </Button>
     </>

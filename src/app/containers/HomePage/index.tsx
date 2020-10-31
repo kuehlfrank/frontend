@@ -22,18 +22,18 @@ export function HomePage() {
           <Col md="4" className="info-box">
             <h5 className="info-header">Was ist Kühlfrank</h5>
             <p className="info-text">
-              Agiles Management jetzt auch für'n Kühlschrank? Ja richtig gehört,
-              Kühlfrank als all-in-one solution um Lebensmittelreste optimal zu
-              verkochen
+              Agiles Management jetzt auch für den Kühlschrank? Ja, richtig
+              gehört. Kühlfrank ist die All-In-One Solution, um
+              Lebensmittelreste optimal zu verbrauchen.
             </p>
           </Col>
           <Col md="1"></Col>
           <Col md="4" className="info-box">
             <h5 className="info-header">Was muss ich tun?</h5>
             <p className="info-text">
-              Um jetzt durchzustarten, registriere dich und teile Kühlfrank mit,
-              welche Lebensmittel zur Verfügung stehen. Dann bleibt nur noch
-              dich für einen der Rezeptvorschläge zu entscheiden
+              Um jetzt durchzustarten, registriere dich und sag Kühlfrank,
+              welche Lebensmittel du über hast. Danach kannst du dich sofort für
+              einen Rezeptvorschlag entscheiden.
             </p>
           </Col>
           <Col md="1">&nbsp;</Col>

@@ -17,7 +17,7 @@ export function LoginButton() {
           })
         }
       >
-        Login &nbsp;
+        Anmelden &nbsp;
         <FontAwesomeIcon icon={faSignInAlt} />
       </Button>
     </>

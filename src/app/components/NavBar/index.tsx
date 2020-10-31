@@ -28,20 +28,20 @@ export function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <LinkContainer to="/home">
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link>Startseite</Nav.Link>
             </LinkContainer>
             {isAuthenticated && (
               <>
                 <LinkContainer to="/recipes">
-                  <Nav.Link>Recipes</Nav.Link>
+                  <Nav.Link>Rezepte</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/items">
-                  <Nav.Link>Items</Nav.Link>
+                  <Nav.Link>Mein Kühlschrank</Nav.Link>
                 </LinkContainer>
               </>
             )}
             <LinkContainer to="/aboutus">
-              <Nav.Link>About us</Nav.Link>
+              <Nav.Link>Über uns</Nav.Link>
             </LinkContainer>
           </Nav>
           <UserBadge />
