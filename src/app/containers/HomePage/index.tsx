@@ -21,7 +21,7 @@ export function HomePage() {
         <Row>
           <Col md="1"></Col>
           <Col md="4" className="info-box">
-            <h5 className="info-header">Was ist Kühlfrank</h5>
+            <h5 className="info-header">Was ist Kühlfrank?</h5>
             <p className="info-text">
               Agiles Management jetzt auch für den Kühlschrank? Ja, richtig
               gehört. Kühlfrank ist die All-In-One Solution, um
