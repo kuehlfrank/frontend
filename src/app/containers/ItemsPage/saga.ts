@@ -154,6 +154,7 @@ export function* updateItem() {
   const requestURL = `${API_URL}/inventory/inventoryEntry/${item.id}`;
   try {
     yield call(putPrivate, requestURL, token, item);
+    yield put(actions.loadItems());
   } catch (err) {
     console.error(err);
   }
