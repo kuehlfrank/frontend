@@ -31,9 +31,9 @@ export const selectFormItemUnit = createSelector(
   itemsFormState => itemsFormState.formItem.unit,
 );
 
-export const selectFormItemQuantity = createSelector(
+export const selectFormItemAmount = createSelector(
   [selectDomain],
-  itemsFormState => itemsFormState.formItem.quantity,
+  itemsFormState => itemsFormState.formItem.amount,
 );
 
 export const selectLoading = createSelector(

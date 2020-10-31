@@ -11,7 +11,7 @@ const API_URL: string = process.env.REACT_APP_API_SERVER_URL as string;
 export const initialState: ItemsPageState = {
   formItem: {
     name: '',
-    quantity: 0,
+    amount: 0,
     unit: undefined,
     alternative_names: undefined,
     imgSrc: undefined,
@@ -40,8 +40,8 @@ const itemsFormSlice = createSlice({
       let unit = state.units.find(unit => unit.unitId === action.payload);
       state.formItem.unit = unit;
     },
-    changeItemQuantity(state, action: PayloadAction<number>) {
-      state.formItem.quantity = action.payload;
+    changeItemAmount(state, action: PayloadAction<number>) {
+      state.formItem.amount = action.payload;
     },
     validateForm(state, action: PayloadAction<boolean>) {
       state.validated = action.payload;

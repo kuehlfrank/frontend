@@ -3,7 +3,7 @@ export interface Item {
   id?: string;
   name: string;
   unit?: ?Unit;
-  quantity: number;
+  amount: number;
   alternative_names?: ?string[];
   imgSrc?: ?string;
 }

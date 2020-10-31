@@ -10,7 +10,7 @@ import {
   selectError,
   selectFormItemName,
   selectFormItemUnit,
-  selectFormItemQuantity,
+  selectFormItemAmount,
   selectValidated,
   selectScanning,
   selectUnits,
@@ -47,7 +47,7 @@ export function ItemsPage() {
   const items = useSelector(selectItems);
   const formItemName = useSelector(selectFormItemName);
   const formItemUnit = useSelector(selectFormItemUnit);
-  const formItemQuantity = useSelector(selectFormItemQuantity);
+  const formItemAmount = useSelector(selectFormItemAmount);
   const validated = useSelector(selectValidated);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -75,10 +75,8 @@ export function ItemsPage() {
     dispatch(actions.setItemUnitById(evt.currentTarget.value));
   };
 
-  const onChangeFormItemQuantity = (
-    evt: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    dispatch(actions.changeItemQuantity(Number(evt.currentTarget.value)));
+  const onChangeFormItemAmount = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(actions.changeItemAmount(Number(evt.currentTarget.value)));
   };
 
   const onSubmitForm = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -86,7 +84,7 @@ export function ItemsPage() {
     let item: Item = {
       name: formItemName,
       unit: formItemUnit,
-      quantity: formItemQuantity,
+      amount: formItemAmount,
     };
     if (evt !== undefined && evt.preventDefault) {
       if (form.checkValidity() === false) {
@@ -167,7 +165,7 @@ export function ItemsPage() {
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text className="input-group-text">
-                      Unit
+                      Einheit
                     </InputGroup.Text>
                   </InputGroup.Prepend>
                   <Form.Control
@@ -183,25 +181,25 @@ export function ItemsPage() {
                     ))}
                   </Form.Control>
                   <Form.Control.Feedback type="invalid">
-                    Please give an unit.
+                    Bitte geben Sie eine Einheit an.
                   </Form.Control.Feedback>
                 </InputGroup>
               </FormGroup>
-              <FormGroup as={Col} md="3" controlId="ValidationQuantity">
+              <FormGroup as={Col} md="3" controlId="ValidationAmount">
                 <InputGroup>
                   <InputGroup.Prepend>
-                    <InputGroup.Text>Quantity</InputGroup.Text>
+                    <InputGroup.Text>Menge</InputGroup.Text>
                   </InputGroup.Prepend>
                   <Form.Control
                     type="number"
-                    value={formItemQuantity}
-                    onChange={onChangeFormItemQuantity}
+                    value={formItemAmount}
+                    onChange={onChangeFormItemAmount}
                     min="0"
                     step="any"
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Give a quantity greater than 0.
+                    Bitte geben Sie eine Menge größer 0 an.
                   </Form.Control.Feedback>
                 </InputGroup>
               </FormGroup>

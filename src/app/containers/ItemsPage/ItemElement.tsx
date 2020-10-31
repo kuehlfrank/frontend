@@ -20,7 +20,7 @@ export function ItemElement({ item, onDelete }: Props) {
       ) : null}
       <Card.Body>
         <p>
-          {item.quantity} {item.unit?.label}
+          {item.amount} {item.unit?.label}
         </p>
       </Card.Body>
       <Card.Footer>

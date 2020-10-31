@@ -16,7 +16,7 @@ import {
 import {
   selectFormItemAlternativeNames,
   selectFormItemName,
-  selectFormItemQuantity,
+  selectFormItemAmount,
   selectFormItemUnit,
   selectItemIdToDelete,
   selectItemImgSrc,
@@ -45,7 +45,7 @@ export function* getItems() {
     let items: Item[] = inventory.inventoryEntries.map(e => ({
       id: e.inventoryEntryId,
       name: e.ingredient.name,
-      quantity: e.amount,
+      amount: e.amount,
       unit: e.unit,
     }));
 
@@ -72,7 +72,7 @@ export function* addItem() {
   const unit = yield select(selectFormItemUnit);
   const item: any = {
     name: yield select(selectFormItemName),
-    quantity: yield select(selectFormItemQuantity),
+    amount: yield select(selectFormItemAmount),
     unitId: unit.unitId,
     imgSrc: yield select(selectItemImgSrc),
     alternative_names: yield select(selectFormItemAlternativeNames),
@@ -97,10 +97,10 @@ export function* getScannedItemInfo() {
       yield put(actions.changeItemName(response.product.product_name_de));
     else yield put(actions.changeItemName(response.product.product_name));
 
-    let quantity: string = response.product.quantity;
-    let unitLabel = quantity.match('\\D.*')![0];
-    let quantityNum = quantity.match('.*\\d')![0];
-    yield put(actions.changeItemQuantity(parseInt(quantityNum)));
+    let amount: string = response.product.amount;
+    let unitLabel = amount.match('\\D.*')![0];
+    let amountNum = amount.match('.*\\d')![0];
+    yield put(actions.changeItemAmount(parseInt(amountNum)));
     const units = yield select(selectUnits);
     yield put(
       actions.changeItemUnit(units.find(unit => unit.label === unitLabel)),
