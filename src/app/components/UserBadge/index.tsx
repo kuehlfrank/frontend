@@ -8,7 +8,7 @@ export function UserBadge() {
     const { name } = user;
     return (
       <>
-        <Navbar.Text>Hello, {name}</Navbar.Text>
+        <Navbar.Text>Hallo, {name}</Navbar.Text>
       </>
     );
   } else {
