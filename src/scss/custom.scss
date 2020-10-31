@@ -95,6 +95,19 @@ $navbar-margin-bottom: 15px;
     margin: 2rem;
 }
 
+.about-image-box {
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.about-image {
+    width: 5vmax;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    border-radius: 50%;
+}
+
 .btn {
     margin-left: .5em;
     margin-right: .5em;
