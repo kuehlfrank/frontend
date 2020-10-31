@@ -86,7 +86,13 @@ export function Recipes(props: Props) {
           </ul>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button onClick={props.onHide} variant="danger">
+            Close
+          </Button>
+
+          <Button href={recipe.externalUrl} variant="primary">
+            Zum Rezept
+          </Button>
         </Modal.Footer>
       </Modal>
     );

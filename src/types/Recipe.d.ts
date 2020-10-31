@@ -6,7 +6,7 @@ export interface Recipe {
   title: string;
   recipeIngredients: RecipeIngredient[];
   imgSrc: string;
-  externalLink: string;
+  externalUrl: string;
   missingIngredientsCount: number;
   totalIngredientsCount: number;
 }
@@ -23,5 +23,4 @@ export interface RecipeOverview {
   imgSrc: string;
   missingIngredientsCount: number;
   externalSource: string;
-  externalUrl?: string;
 }
