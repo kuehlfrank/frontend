@@ -72,8 +72,10 @@ export function AboutUsPage() {
             <Col md="9" className="info-box">
               <h5 className="info-header">Nico</h5>
               <p className="info-text">
-                Moin, ich bin Nico. Neben meinem DJ-Gewerbe arbeite ich als
-                Softwareentwickler bei der Stadt Essen.
+                Moin, ich bin Nico. Beruflich tätig als Full-Stack
+                Web-Entwickler bei der Stadt Essen. Nebenberuflich bin ich ein
+                Musik- und Technikenthusiast. Selbständig als DJ interessiert
+                mich neben der IT auch die Veranstaltungstechnik.
               </p>
             </Col>
             <Col md="1">&nbsp;</Col>
