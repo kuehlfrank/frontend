@@ -2,11 +2,12 @@ import React from 'react';
 import { Card, Button, CardImg } from 'react-bootstrap';
 import { Item } from 'types/Item';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faBalanceScale } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   item: Item;
   onDelete?: (string, any) => any;
+  onEdit?: (string, any) => any;
 }
 
 export function ItemElement({ item, onDelete }: Props) {
@@ -23,7 +24,10 @@ export function ItemElement({ item, onDelete }: Props) {
           {item.amount} {item.unit?.label}
         </p>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="justify-content-between">
+        <Button variant="primary" className="float-left" onClick={e => {}}>
+          Menge anpassen
+        </Button>
         <Button
           variant="danger"
           className="float-right"
@@ -34,7 +38,7 @@ export function ItemElement({ item, onDelete }: Props) {
           }}
         >
           <FontAwesomeIcon icon={faTrash} />
-          &nbsp; Delete
+          &nbsp; Löschen
         </Button>
       </Card.Footer>
     </Card>

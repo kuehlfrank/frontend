@@ -39,7 +39,7 @@ export function* getItems() {
   );
   const token: string = yield select(selectToken);
   const userId: string = yield select(selectUserId);
-  const requestURL = `${API_URL}/inventory/${encodeURIComponent(userId)}`;
+  const requestURL = `${API_URL}/inventory`;
   try {
     const inventory: Inventory = yield call(requestPrivate, requestURL, token);
     let items: Item[] = inventory.inventoryEntries.map(e => ({
@@ -60,15 +60,9 @@ export function* getItems() {
 }
 
 export function* addItem() {
-  yield call(
-    waitFor,
-    state => selectToken(state) != null && selectUserId(state) != null,
-  );
+  yield call(waitFor, state => selectToken(state) != null);
   const token: string = yield select(selectToken);
-  const userId: string = yield select(selectUserId);
-  const requestURL = `${API_URL}/inventory/${encodeURIComponent(
-    userId,
-  )}/inventoryEntry`;
+  const requestURL = `${API_URL}/inventory/inventoryEntry`;
   const unit = yield select(selectFormItemUnit);
   const item: any = {
     name: yield select(selectFormItemName),
@@ -135,16 +129,12 @@ export function* getUnits() {
 }
 
 export function* deleteItem() {
-  yield call(
-    waitFor,
-    state => selectToken(state) != null && selectUserId(state) != null,
-  );
-  const userId = yield select(selectUserId);
+  yield call(waitFor, state => selectToken(state) != null);
   const itemId = yield select(selectItemIdToDelete);
   const token = yield select(selectToken);
-  const requestURL = `${API_URL}/inventory/${encodeURIComponent(
-    userId,
-  )}/inventoryEntry/${encodeURIComponent(itemId)}`;
+  const requestURL = `${API_URL}/inventory/inventoryEntry/${encodeURIComponent(
+    itemId,
+  )}`;
   try {
     yield call(deletePrivate, requestURL, token);
   } catch (err) {
