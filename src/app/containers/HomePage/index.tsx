@@ -18,24 +18,25 @@ export function HomePage() {
       </Jumbotron>
       <Container className="homepage-container" fluid>
         <Row>
-          <Col md="2"></Col>
-          <Col md="3" className="info-box">
-            <h5>Was ist Kühlfrank</h5>
-            <p>
+          <Col md="1"></Col>
+          <Col md="4" className="info-box">
+            <h5 className="info-header">Was ist Kühlfrank</h5>
+            <p className="info-text">
               Agiles Management jetzt auch für'n Kühlschrank? Ja richtig gehört,
               Kühlfrank als all-in-one solution um Lebensmittelreste optimal zu
               verkochen
             </p>
           </Col>
-          <Col md="2"></Col>
-          <Col md="3" className="info-box">
-            <h5>Was muss ich tun?</h5>
-            <p>
+          <Col md="1"></Col>
+          <Col md="4" className="info-box">
+            <h5 className="info-header">Was muss ich tun?</h5>
+            <p className="info-text">
               Um jetzt durchzustarten, registriere dich und teile Kühlfrank mit,
               welche Lebensmittel zur Verfügung stehen. Dann bleibt nur noch
               dich für einen der Rezeptvorschläge zu entscheiden
             </p>
           </Col>
+          <Col md="1">&nbsp;</Col>
         </Row>
       </Container>
       <footer className="mt-auto">

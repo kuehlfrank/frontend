@@ -29,7 +29,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { Recipes } from './containers/RecipesPage';
+import { Recipes } from './containers/RecipesPage/Loadable';
 import { KuehlfrankProvider } from './containers/KuehlfrankProvider';
 
 export function App() {

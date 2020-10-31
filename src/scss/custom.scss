@@ -52,6 +52,25 @@ footer {
     padding-left: 10vw;
 }
 
+.info-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+    letter-spacing: .05em;
+    font-size: 28px;
+    line-height: 3rem;
+}
+
+.info-text {
+    text-align: justify;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    text-rendering: optimizelegibility !important;
+    letter-spacing: .03em;
+    font-size: 20px;
+    line-height: 1.75rem;
+}
+
 
 $body-bg: #fafafa;
 $theme-colors: ("primary": #5a8aff,
