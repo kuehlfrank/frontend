@@ -19,8 +19,8 @@ export function RecipeItem({ recipe, onDetails }: Props) {
         <Badge variant="info" className="float-right">
           {recipe.missingIngredientsCount > 0 ? (
             <>
-              {recipe.missingIngredientsCount} / {recipe.totalIngredientsCount}{' '}
-              Zutaten
+              {recipe.totalIngredientsCount - recipe.missingIngredientsCount} /{' '}
+              {recipe.totalIngredientsCount} Zutaten
             </>
           ) : null}
         </Badge>
