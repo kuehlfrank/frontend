@@ -22,5 +22,6 @@ export interface RecipeOverview {
   title: string;
   imgSrc: string;
   missingIngredientsCount: number;
+  totalIngredientsCount: number;
   externalSource: string;
 }

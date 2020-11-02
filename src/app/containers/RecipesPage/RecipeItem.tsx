@@ -18,7 +18,10 @@ export function RecipeItem({ recipe, onDetails }: Props) {
         <Card.Title>{recipe.title} </Card.Title>
         <Badge variant="info" className="float-right">
           {recipe.missingIngredientsCount > 0 ? (
-            <>{recipe.missingIngredientsCount} missing Ingredients</>
+            <>
+              {recipe.missingIngredientsCount} / {recipe.totalIngredientsCount}{' '}
+              Zutaten
+            </>
           ) : null}
         </Badge>
       </Card.Header>
