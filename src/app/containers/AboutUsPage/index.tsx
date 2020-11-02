@@ -47,7 +47,6 @@ export function AboutUsPage() {
               <LazyLoad once>
                 <img className="about-image" src="/lars.jpg" />
               </LazyLoad>
-              s
             </Col>
             <Col md="9" className="info-box">
               <h5 className="info-header">Lars</h5>
