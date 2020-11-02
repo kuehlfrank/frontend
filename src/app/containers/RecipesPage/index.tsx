@@ -79,7 +79,8 @@ export function Recipes(props: Props) {
               <li key={i}>
                 <p className={ingredient.missing ? 'text-danger' : ''}>
                   {ingredient.amount !== 0 && ingredient.amount}{' '}
-                  {ingredient.unit?.label} {ingredient.ingredient.name}
+                  {ingredient.unit?.label} {ingredient.ingredient.name}{' '}
+                  {ingredient.common ? '(gewöhnliche Zutat)' : null}
                 </p>
               </li>
             ))}

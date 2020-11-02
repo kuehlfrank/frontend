@@ -15,6 +15,7 @@ export interface RecipeIngredient {
   ingredient: Ingredient;
   missing: boolean;
   unit: Unit;
+  common: boolean;
 }
 
 export interface RecipeOverview {
