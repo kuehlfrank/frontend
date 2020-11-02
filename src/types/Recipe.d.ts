@@ -7,6 +7,7 @@ export interface Recipe {
   recipeIngredients: RecipeIngredient[];
   imgSrc: string;
   externalUrl: string;
+  common: boolean;
   missingIngredientsCount: number;
   totalIngredientsCount: number;
 }
@@ -15,7 +16,6 @@ export interface RecipeIngredient {
   ingredient: Ingredient;
   missing: boolean;
   unit: Unit;
-  common: boolean;
 }
 
 export interface RecipeOverview {
