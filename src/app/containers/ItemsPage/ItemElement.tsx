@@ -15,8 +15,7 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, actions, reducer } from './slice';
 import { itemsRepoSaga } from './saga';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUnits } from './selectors';
-import { selectShowDetailModal } from '../RecipesPage/selectors';
+import LazyLoad from 'react-lazyload';
 
 interface Props {
   item: Item;
@@ -37,8 +36,10 @@ export function ItemElement({ item, onDelete, onEdit }: Props) {
         <Card.Header>
           <Card.Title>{item.name}</Card.Title>
         </Card.Header>
-        {item.imgSrc !== null && item.imgSrc !== undefined ? (
-          <CardImg src={item.imgSrc} />
+        {item.imgSrc ? (
+          <LazyLoad once>
+            <CardImg src={item.imgSrc} />{' '}
+          </LazyLoad>
         ) : null}
         <Card.Body>
           <p>

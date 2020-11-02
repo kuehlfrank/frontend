@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import LazyLoad from 'react-lazyload';
 
 export function AboutUsPage() {
   return (
@@ -9,7 +10,9 @@ export function AboutUsPage() {
         <Container className="homepage-container" fluid>
           <Row>
             <Col md="1" className="about-image-box">
-              <img className="about-image" src="/tom.jpg" />
+              <LazyLoad once>
+                <img className="about-image" src="/tom.jpg" />
+              </LazyLoad>
             </Col>
             <Col md="9" className="info-box">
               <h5 className="info-header">Tom</h5>
@@ -24,22 +27,27 @@ export function AboutUsPage() {
           </Row>
           <Row>
             <Col md="1" className="about-image-box">
-              <img className="about-image" src="/linus.jpg" />
+              <LazyLoad once>
+                <img className="about-image" src="/linus.jpg" />
+              </LazyLoad>
             </Col>
             <Col md="9" className="info-box">
               <h5 className="info-header">Linus</h5>
               <p className="info-text">
-                Hey, ich bin Linus. Während meines dualen Studiums bei der 
-                Fiducia & GAD IT AG bin ich als Softwareentwickler tätig.
-                In meiner Freizeit fahre ich Mountainbike und führe verschiedene 
-                Projekte mit Freunden durch.                
+                Hey, ich bin Linus. Während meines dualen Studiums bei der
+                Fiducia & GAD IT AG bin ich als Softwareentwickler tätig. In
+                meiner Freizeit fahre ich Mountainbike und führe verschiedene
+                Projekte mit Freunden durch.
               </p>
             </Col>
             <Col md="1">&nbsp;</Col>
           </Row>
           <Row>
             <Col md="1" className="about-image-box">
-              <img className="about-image" src="/lars.jpg" />
+              <LazyLoad once>
+                <img className="about-image" src="/lars.jpg" />
+              </LazyLoad>
+              s
             </Col>
             <Col md="9" className="info-box">
               <h5 className="info-header">Lars</h5>
@@ -54,7 +62,9 @@ export function AboutUsPage() {
           </Row>
           <Row>
             <Col md="1" className="about-image-box">
-              <img className="about-image" src="/alexander.jpg" />
+              <LazyLoad once>
+                <img className="about-image" src="/alexander.jpg" />
+              </LazyLoad>
             </Col>
             <Col md="9" className="info-box">
               <h5 className="info-header">Alexander</h5>
@@ -68,7 +78,9 @@ export function AboutUsPage() {
           </Row>
           <Row>
             <Col md="1" className="about-image-box">
-              <img className="about-image" src="/nico.jpg" />
+              <LazyLoad once>
+                <img className="about-image" src="/nico.jpg" />
+              </LazyLoad>
             </Col>
             <Col md="9" className="info-box">
               <h5 className="info-header">Nico</h5>

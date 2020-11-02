@@ -4,6 +4,7 @@ import { Item } from 'types/Item';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { RecipeOverview } from 'types/Recipe';
+import LazyLoad from 'react-lazyload';
 
 interface Props {
   recipe: RecipeOverview;
@@ -22,7 +23,9 @@ export function RecipeItem({ recipe, onDetails }: Props) {
         </Badge>
       </Card.Header>
       {recipe.imgSrc !== null && recipe.imgSrc !== undefined ? (
-        <CardImg src={recipe.imgSrc} />
+        <LazyLoad once>
+          <CardImg src={recipe.imgSrc} />
+        </LazyLoad>
       ) : null}
       <Card.Footer>
         <div className="d-flex align-items-center justify-content-between">
