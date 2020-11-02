@@ -195,12 +195,12 @@ export function ItemsPage() {
       switch (error) {
         case 1:
           return {
-            message: 'No items. Try adding some.',
+            message: 'Keine Gegenstände im Kühlschrank.',
             variant: 'warning',
           };
         case 99:
           return {
-            message: 'Could not fetch data.',
+            message: 'Fehler beim Laden der Daten.',
             variant: 'danger',
           };
         default:

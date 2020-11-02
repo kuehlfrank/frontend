@@ -89,7 +89,7 @@ export function Recipes(props: Props) {
         <Modal.Footer>
           <Row className="justify-content-between">
             <Button onClick={props.onHide} variant="danger">
-              Close
+              Schließen
             </Button>
 
             <Button target="_ref" href={recipe.externalUrl} variant="primary">
