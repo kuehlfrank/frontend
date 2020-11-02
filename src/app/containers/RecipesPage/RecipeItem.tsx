@@ -23,7 +23,7 @@ export function RecipeItem({ recipe, onDetails }: Props) {
         </Badge>
       </Card.Header>
       {recipe.imgSrc !== null && recipe.imgSrc !== undefined ? (
-        <LazyLoad once>
+        <LazyLoad once height={337}>
           <CardImg src={recipe.imgSrc} />
         </LazyLoad>
       ) : null}
